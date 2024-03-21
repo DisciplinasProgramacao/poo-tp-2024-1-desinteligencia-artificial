@@ -1,6 +1,10 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=14314822)
-# Nome do projeto
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+# OO Comidinhas Veganas
+“Um restaurante atende seus clientes alocando-os em mesas por meio de 'requisições por mesas'. No momento, o 
+restaurante possui 10 mesas: 4 com capacidade para 4 pessoas, 4 com capacidade para 6 pessoas e 2 com capacidade para 
+8 pessoas. O cliente, ao chegar, deve declarar quantas pessoas comerão no restaurante, gerando assim uma requisição por 
+mesa. Tão logo quanto possível deverá ser alocada uma mesa adequada para ele. Se não houver mesa livre, o cliente entra 
+numa fila de espera. As requisições precisam registrar data e horas de entrada e saída do cliente.”
 
 ## Alunos integrantes da equipe
 
@@ -13,6 +17,4 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 
 ## Professores responsáveis
 
-* Nome completo do professor 1
-* Nome completo do professor 2
-
+* João Caram
