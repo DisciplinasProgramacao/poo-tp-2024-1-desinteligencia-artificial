@@ -1,0 +1,15 @@
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\codigo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\codigo.AssemblyInfoInputs.cache
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\codigo.AssemblyInfo.cs
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\codigo.csproj.CoreCompileInputs.cache
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\codigo.sourcelink.json
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\bin\Debug\net8.0\codigo.exe
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\bin\Debug\net8.0\codigo.deps.json
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\bin\Debug\net8.0\codigo.runtimeconfig.json
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\bin\Debug\net8.0\codigo.dll
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\bin\Debug\net8.0\codigo.pdb
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\codigo.dll
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\refint\codigo.dll
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\codigo.pdb
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\codigo.genruntimeconfig.cache
+C:\Users\aluis\Desktop\Trabalhos\TrabalhoPoo\poo-tp-2024-1-desinteligencia-artificial\codigo\obj\Debug\net8.0\ref\codigo.dll
