@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{DC8B32E4-5AD5-48F6-8774-0FFCB82BDC39}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.trabalho-poo-01 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="trabalho-poo-01/codigo/Restaurante.cs">
+    <Files>
+      <File FileName="trabalho-poo-01/codigo/Restaurante.cs" Line="1" Column="1" />
+      <File FileName="trabalho-poo-01/codigo/ReqMesa.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="trabalho-poo-01">
+            <Node name="trabalho-poo-01" expanded="True">
+              <Node name="codigo" expanded="True" />
+              <Node name="docs" expanded="True">
+                <Node name="diagramas" expanded="True">
+                  <Node name="01.png" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>
