@@ -3,10 +3,15 @@ internal class FiladeEspera
   private int capacidadeMesa;
   private Queue<ReqMesa> requisicoes = new Queue<ReqMesa>();
 
-    /// <summary>
-    ///  Adiciona requisição à fila de requisições
-    /// </summary>
-    /// <param name="req">ReqMesa para enfileirar</param>
+  public FiladeEspera(int capacidadeMesa)
+  {
+    this.capacidadeMesa = capacidadeMesa;
+  }
+
+  /// <summary>
+  ///  Adiciona requisição à fila de requisições
+  /// </summary>
+  /// <param name="req">ReqMesa para enfileirar</param>
 
   public void AddRequisicao(ReqMesa req)
   {
