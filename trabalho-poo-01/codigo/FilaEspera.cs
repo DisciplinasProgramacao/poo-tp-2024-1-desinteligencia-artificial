@@ -1,6 +1,5 @@
 class FilaEspera{
-    internal class FilaEspera
-{
+
   private int capacidadeMesa;
   private Queue<ReqMesa> requisicoes = new Queue<ReqMesa>();
 
@@ -52,5 +51,5 @@ class FilaEspera{
       Console.WriteLine(r.nomeCliente);
     }
   }
-}
+
 }
