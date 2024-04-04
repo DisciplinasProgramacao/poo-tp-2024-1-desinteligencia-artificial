@@ -3,6 +3,11 @@ internal class FiladeEspera
   private int capacidadeMesa;
   private Queue<ReqMesa> requisicoes = new Queue<ReqMesa>();
 
+  /// <summary>
+  /// Método construtor da classe
+  /// </summary>
+  /// <param name="capacidadeMesa">Quantidade de pessoas que podem ficar na mesa</param>
+
   public FiladeEspera(int capacidadeMesa)
   {
     this.capacidadeMesa = capacidadeMesa;
