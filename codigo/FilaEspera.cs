@@ -1,4 +1,4 @@
-internal class FiladeEspera
+internal class FilaEspera
 {
   private int capacidadeMesa;
   private Queue<ReqMesa> requisicoes = new Queue<ReqMesa>();
@@ -8,7 +8,7 @@ internal class FiladeEspera
   /// </summary>
   /// <param name="capacidadeMesa">Quantidade de pessoas que podem ficar na mesa</param>
 
-  public FiladeEspera(int capacidadeMesa)
+  public FilaEspera(int capacidadeMesa)
   {
     this.capacidadeMesa = capacidadeMesa;
   }
