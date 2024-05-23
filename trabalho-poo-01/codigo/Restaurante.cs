@@ -30,19 +30,21 @@ class Restaurante
     }
 
     /// <summary>
-    /// Fecha a mesa especificada pelo ID.
+    /// Fecha a mesa especificada pelo ID e retorna o valor da conta.
     /// </summary>
     /// <param name="idMesa">ID da mesa a ser fechada.</param>
-    /// <returns>True se a mesa foi fechada com sucesso, caso contrário, False.</returns>
-    public bool FecharMesa(int idMesa)
+    /// <returns>O valor da conta se a mesa foi fechada com sucesso, caso contrário, retorna 0.</returns>
+    public double FecharConta(int idMesa, int qtdPessoas)
     {
+        ReqMesa req = listaRegistros.Find(r => r.idMesa == idMesa); 
         Mesa mesa = mesas.Find(m => m.numeroMesa == idMesa);
         if (mesa != null)
         {
             mesa.DesocuparMesa();
-            return true;
+            req.FecharRequisicao();
+            return req.pedido.FecharConta();
         }
-        return false;
+        return 0;
     }
 
     /// <summary>
@@ -82,15 +84,6 @@ class Restaurante
             }
         }
         return false;
-    }
-
-    /// <summary>
-    /// Processa uma requisição.
-    /// </summary>
-    /// <param name="req">Requisição a ser processada.</param>
-    private void ProcessaReq(ReqMesa req)
-    {
-        // Implementação do processamento da requisição
     }
 
     /// <summary>
