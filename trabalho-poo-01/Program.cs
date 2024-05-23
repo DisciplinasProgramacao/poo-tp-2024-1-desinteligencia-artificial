@@ -1,6 +1,6 @@
 ﻿class Program
 {
-    Restaurante restaurante = new Restaurante();
+    static Restaurante restaurante = new Restaurante();
 
     public static void CadastrarCliente()
     {
@@ -22,15 +22,15 @@
     public static void AtenderCliente()
     {
         Console.WriteLine("Digite o nome do cliente para atendê-lo:");
-        string nome = Console.ReadLine;
+        string nome = Console.ReadLine();
 
         Cliente cliente = restaurante.PesquisarCliente(nome);
 
         if (!cliente)
         {
             Console.WriteLine("Cliente não foi encontrado no sistema, cadastre-o antes de atendê-lo!");
-            CadastrarCliente()
-            return
+            CadastrarCliente();
+            return;
         }
 
         Console.WriteLine("Digite a quantidade de pessoas que sentarão à mesa:");
@@ -87,7 +87,7 @@
                     Console.Clear();
                     CadastrarCliente();
                     break;
-                case 1:
+                case 2:
                     Console.Clear();
                     AtenderCliente();
                     break;
