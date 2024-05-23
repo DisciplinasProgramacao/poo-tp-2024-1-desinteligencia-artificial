@@ -1,55 +1,135 @@
-class Restaurante{
-    private List<Mesa> mesas;
-    private List<FilaEspera> filaDeEspera;
+using System;
+using System.Collections.Generic;
 
-    public Restaurante(){
+/// <summary>
+/// Classe que representa um restaurante.
+/// </summary>
+class Restaurante
+{
+    private List<Mesa> mesas;
+    private List<ReqMesa> listaRegistros;
+    private List<ReqMesa> listaEspera;
+    private List<Cliente> clientes;
+    private List<Produto> produtos;
+
+    /// <summary>
+    /// Construtor da classe Restaurante. Inicializa as listas de mesas, registros, lista de espera, clientes e produtos.
+    /// Cria mesas com diferentes capacidades.
+    /// </summary>
+    public Restaurante()
+    {
         this.mesas = new List<Mesa>();
-        this.filaDeEspera = new List<FilaEspera>();
+        this.listaRegistros = new List<ReqMesa>();
+        this.listaEspera = new List<ReqMesa>();
+        this.clientes = new List<Cliente>();
+        this.produtos = new List<Produto>();
 
         CriarMesas(4, 4); // 4 mesas de capacidade 4
         CriarMesas(4, 6); // 4 mesas de capacidade 6
         CriarMesas(2, 8); // 2 mesas de capacidade 8
-
-        filaDeEspera.Add(new FilaEspera(4));
-        filaDeEspera.Add(new FilaEspera(6));
-        filaDeEspera.Add(new FilaEspera(8));
     }
-    
-    public void AlocarMesa(int qtdPessoa, string nome){
-        bool mesaAlocada = false;
-        foreach(Mesa mesa in mesas){
-            if(mesa.capacidade <= qtdPessoa && !mesa.isOcupada){
-                mesa.ocuparMesa();
-                mesaAlocada = true;
-                break;
+
+    /// <summary>
+    /// Fecha a mesa especificada pelo ID.
+    /// </summary>
+    /// <param name="idMesa">ID da mesa a ser fechada.</param>
+    /// <returns>True se a mesa foi fechada com sucesso, caso contrário, False.</returns>
+    public bool FecharMesa(int idMesa)
+    {
+        Mesa mesa = mesas.Find(m => m.numeroMesa == idMesa);
+        if (mesa != null)
+        {
+            mesa.DesocuparMesa();
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Aloca uma mesa para a requisição especificada.
+    /// </summary>
+    /// <param name="req">Requisição de mesa.</param>
+    /// <returns>True se a mesa foi alocada com sucesso, caso contrário, False.</returns>
+    public bool AlocarMesa(ReqMesa req)
+    {
+        foreach (Mesa mesa in mesas)
+        {
+            if (mesa.capacidade >= req.qtdPessoas && !mesa.isOcupada)
+            {
+                mesa.OcuparMesa();
+                req.AtribuirMesaARequisicao(mesa.numeroMesa);
+                listaRegistros.Add(req);
+                return true;
             }
         }
 
-        if(!mesaAlocada){
-            Mesa mesa = mesas.Find(mesa => mesa.capacidade <= qtdPessoa);
-            ReqMesa req = new ReqMesa(qtdPessoa, nome, mesa);
-        }
+        listaEspera.Add(req);
+        return false;
     }
 
-    public void DesalocarDaFilaEspera (int idReq) {
-        foreach(FilaEspera fila in filaDeEspera){
-            foreach(ReqMesa req in fila.requisicoes){
-                if(req.idReq == idReq){
-                    req.FecharRequisicao();
-                    fila.RemoveRequisicao(req);
-                    return;
-                }
+    /// <summary>
+    /// Processa a lista de espera para alocar mesas.
+    /// </summary>
+    /// <returns>True se pelo menos uma requisição foi processada com sucesso, caso contrário, False.</returns>
+    public bool ProcessarListaDeEspera()
+    {
+        foreach (ReqMesa req in listaEspera)
+        {
+            if (AlocarMesa(req))
+            {
+                listaEspera.Remove(req);
+                return true;
             }
         }
-    }
-    private void AlocarNaFilaEspera (ReqMesa reqMesa){
-        FilaEspera fila = filaDeEspera.Find(fila => fila.capacidadeMesa <= qtdPessoa);
-        fila.AddReq(reqMesa);
+        return false;
     }
 
-    private void CriarMesas(int qtdMesas, int qtdPessoas){
-        for ( int i = 0; i < qtdMesas; i++){
-            mesas.Add(new Mesa(qtdPessoas));
+    /// <summary>
+    /// Processa uma requisição.
+    /// </summary>
+    /// <param name="req">Requisição a ser processada.</param>
+    private void ProcessaReq(ReqMesa req)
+    {
+        // Implementação do processamento da requisição
+    }
+
+    /// <summary>
+    /// Adiciona um cliente à lista de clientes.
+    /// </summary>
+    /// <param name="nome">Nome do cliente.</param>
+    /// <returns>O objeto Cliente adicionado.</returns>
+    public Cliente AdicionarCliente(string nome)
+    {
+        Cliente cliente = new Cliente { nome = nome };
+        clientes.Add(cliente);
+        return cliente;
+    }
+
+    /// <summary>
+    /// Cria mesas com a quantidade e capacidade especificadas.
+    /// </summary>
+    /// <param name="qtdMesas">Quantidade de mesas a serem criadas.</param>
+    /// <param name="qtdPessoas">Capacidade de pessoas por mesa.</param>
+    private void CriarMesas(int qtdMesas, int qtdPessoas)
+    {
+        for (int i = 0; i < qtdMesas; i++)
+        {
+            mesas.Add(new Mesa { numeroMesa = i + 1, capacidade = qtdPessoas, isOcupada = false });
+        }
+    }
+
+    /// <summary>
+    /// Pede um produto para uma requisição específica.
+    /// </summary>
+    /// <param name="idProduto">ID do produto.</param>
+    /// <param name="idReq">ID da requisição.</param>
+    public void PedirProduto(int idProduto, int idReq)
+    {
+        Produto produto = produtos.Find(p => p.id == idProduto);
+        ReqMesa req = listaRegistros.Find(r => r.idReq == idReq);
+        if (produto != null && req != null)
+        {
+            req.pedido.AdicionarProduto(produto.id);
         }
     }
 }
