@@ -42,7 +42,7 @@
 
             if (qntPessoas > 0)
             {
-                AlocarClienteAMesa(qntPessoas)
+                AlocarClienteAMesa(qntPessoas);
             }
             else
             {
