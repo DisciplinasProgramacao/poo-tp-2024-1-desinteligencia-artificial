@@ -29,9 +29,9 @@ class Restaurante{
             Mesa mesa = mesas.Find(mesa => mesa.capacidade <= qtdPessoa);
             ReqMesa req = new ReqMesa(qtdPessoa, nome, mesa);
         }
-
     }
-    public void DesalocarDaFilaEspera (int idReq){
+
+    public void DesalocarDaFilaEspera (int idReq) {
         foreach(FilaEspera fila in filaDeEspera){
             foreach(ReqMesa req in fila.requisicoes){
                 if(req.idReq == idReq){
