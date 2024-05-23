@@ -10,7 +10,7 @@ class Restaurante
     private List<ReqMesa> listaRegistros;
     private List<ReqMesa> listaEspera;
     private List<Cliente> clientes;
-    private List<Produto> produtos;
+    private Cardapio cardapio;
 
     /// <summary>
     /// Construtor da classe Restaurante. Inicializa as listas de mesas, registros, lista de espera, clientes e produtos.
@@ -22,7 +22,7 @@ class Restaurante
         this.listaRegistros = new List<ReqMesa>();
         this.listaEspera = new List<ReqMesa>();
         this.clientes = new List<Cliente>();
-        this.produtos = new List<Produto>();
+        this.cardapio = new Cardapio();
 
         CriarMesas(4, 4); // 4 mesas de capacidade 4
         CriarMesas(4, 6); // 4 mesas de capacidade 6
@@ -37,12 +37,11 @@ class Restaurante
     public double FecharConta(int idMesa, int qtdPessoas)
     {
         ReqMesa req = listaRegistros.Find(r => r.idMesa == idMesa); 
-        Mesa mesa = mesas.Find(m => m.numeroMesa == idMesa);
+        Mesa mesa = mesas.Find(mesa => mesa.numeroMesa == idMesa);
         if (mesa != null)
         {
             mesa.DesocuparMesa();
-            req.FecharRequisicao();
-            return req.pedido.FecharConta();
+            return req.FecharRequisicao();
         }
         return 0;
     }
@@ -118,11 +117,15 @@ class Restaurante
     /// <param name="idReq">ID da requisição.</param>
     public void PedirProduto(int idProduto, int idReq)
     {
-        Produto produto = produtos.Find(p => p.id == idProduto);
-        ReqMesa req = listaRegistros.Find(r => r.idReq == idReq);
+        Produto produto = cardapio.ObterProdutos(idProduto);
+        ReqMesa req = listaRegistros.Find(registro => registro.idReq == idReq);
         if (produto != null && req != null)
         {
-            req.pedido.AdicionarProduto(produto.id);
+            req.ReceberProduto(produto.id);
         }
+    }
+
+    public void MostrarCardapio(){
+        cardapio.MostrarOpcoes();
     }
 }
