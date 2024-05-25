@@ -13,7 +13,7 @@ class Restaurante
     private Cardapio cardapio;
 
     /// <summary>
-    /// Construtor da classe Restaurante. Inicializa as listas de mesas, registros, lista de espera, clientes e produtos.
+    /// Construtor da classe Restaurante. Inicializa as listas de mesas, registros, lista de espera, clientes e cardápio.
     /// Cria mesas com diferentes capacidades.
     /// </summary>
     public Restaurante()
@@ -36,12 +36,12 @@ class Restaurante
     /// <returns>O valor da conta se a mesa foi fechada com sucesso, caso contrário, retorna 0.</returns>
     public double FecharConta(int idMesa, int qtdPessoas)
     {
-        ReqMesa req = listaRegistros.Find(r => r.idMesa == idMesa); 
+        ReqMesa req = listaRegistros.Find(req => req.idMesa == idMesa); 
         Mesa mesa = mesas.Find(mesa => mesa.numeroMesa == idMesa);
         if (mesa != null)
         {
             mesa.DesocuparMesa();
-            return req.FecharRequisicao();
+            return req.FecharRequisicao(qtdPessoas);
         }
         return 0;
     }
@@ -55,7 +55,7 @@ class Restaurante
     {
         foreach (Mesa mesa in mesas)
         {
-            if (mesa.capacidade >= req.qtdPessoas && !mesa.isOcupada)
+            if (mesa.VerificarDisponibilidade(req.qtdPessoas))
             {
                 mesa.OcuparMesa();
                 req.AtribuirMesaARequisicao(mesa.numeroMesa);
@@ -92,7 +92,7 @@ class Restaurante
     /// <returns>O objeto Cliente adicionado.</returns>
     public Cliente AdicionarCliente(string nome)
     {
-        Cliente cliente = new Cliente { nome = nome };
+        Cliente cliente = new Cliente{Nome = nome};
         clientes.Add(cliente);
         return cliente;
     }
@@ -117,7 +117,7 @@ class Restaurante
     /// <param name="idReq">ID da requisição.</param>
     public void PedirProduto(int idProduto, int idReq)
     {
-        Produto produto = cardapio.ObterProdutos(idProduto);
+        Produto produto = cardapio.ObterProduto(idProduto);
         ReqMesa req = listaRegistros.Find(registro => registro.idReq == idReq);
         if (produto != null && req != null)
         {
@@ -125,7 +125,11 @@ class Restaurante
         }
     }
 
-    public void MostrarCardapio(){
+    /// <summary>
+    /// Chama o método de mostrar produtos do cardápio
+    /// </summary>
+
+    public void ExibirCardapio(){
         cardapio.MostrarOpcoes();
     }
 }
