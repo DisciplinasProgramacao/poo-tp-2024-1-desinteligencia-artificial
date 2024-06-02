@@ -33,6 +33,7 @@ class Restaurante
     /// Fecha a mesa especificada pelo ID e retorna o valor da conta.
     /// </summary>
     /// <param name="idMesa">ID da mesa a ser fechada.</param>
+    /// <param name="qtdPessoas">Quantidade de pessoas que vão pagar.</param>
     /// <returns>O valor da conta se a mesa foi fechada com sucesso, caso contrário, retorna 0.</returns>
     public double FecharConta(int idMesa, int qtdPessoas)
     {
@@ -128,8 +129,8 @@ class Restaurante
     /// <summary>
     /// Chama o método de mostrar produtos do cardápio
     /// </summary>
-
-    public void ExibirCardapio(){
-        cardapio.MostrarOpcoes();
+    /// <returns>Lista de produtos do cardápio</returns>
+    public string ExibirCardapio(){
+        return cardapio.MostrarOpcoes();
     }
 }
