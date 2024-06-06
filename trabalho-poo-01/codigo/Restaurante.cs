@@ -10,10 +10,10 @@ class Restaurante
     private List<ReqMesa> listaRegistros;
     private List<ReqMesa> listaEspera;
     private List<Cliente> clientes;
-    private List<Produto> produtos;
+    private Cardapio cardapio;
 
     /// <summary>
-    /// Construtor da classe Restaurante. Inicializa as listas de mesas, registros, lista de espera, clientes e produtos.
+    /// Construtor da classe Restaurante. Inicializa as listas de mesas, registros, lista de espera, clientes e cardápio.
     /// Cria mesas com diferentes capacidades.
     /// </summary>
     public Restaurante()
@@ -22,7 +22,7 @@ class Restaurante
         this.listaRegistros = new List<ReqMesa>();
         this.listaEspera = new List<ReqMesa>();
         this.clientes = new List<Cliente>();
-        this.produtos = new List<Produto>();
+        this.cardapio = new Cardapio();
 
         CriarMesas(4, 4); // 4 mesas de capacidade 4
         CriarMesas(4, 6); // 4 mesas de capacidade 6
@@ -33,16 +33,16 @@ class Restaurante
     /// Fecha a mesa especificada pelo ID e retorna o valor da conta.
     /// </summary>
     /// <param name="idMesa">ID da mesa a ser fechada.</param>
+    /// <param name="qtdPessoas">Quantidade de pessoas que vão pagar.</param>
     /// <returns>O valor da conta se a mesa foi fechada com sucesso, caso contrário, retorna 0.</returns>
     public double FecharConta(int idMesa, int qtdPessoas)
     {
-        ReqMesa req = listaRegistros.Find(r => r.idMesa == idMesa); 
-        Mesa mesa = mesas.Find(m => m.numeroMesa == idMesa);
+        ReqMesa req = listaRegistros.Find(req => req.idMesa == idMesa); 
+        Mesa mesa = mesas.Find(mesa => mesa.numeroMesa == idMesa);
         if (mesa != null)
         {
             mesa.DesocuparMesa();
-            req.FecharRequisicao();
-            return req.pedido.FecharConta();
+            return req.FecharRequisicao(qtdPessoas);
         }
         return 0;
     }
@@ -56,7 +56,7 @@ class Restaurante
     {
         foreach (Mesa mesa in mesas)
         {
-            if (mesa.capacidade >= req.qtdPessoas && !mesa.isOcupada)
+            if (mesa.VerificarDisponibilidade(req.qtdPessoas))
             {
                 mesa.OcuparMesa();
                 req.AtribuirMesaARequisicao(mesa.numeroMesa);
@@ -93,7 +93,7 @@ class Restaurante
     /// <returns>O objeto Cliente adicionado.</returns>
     public Cliente AdicionarCliente(string nome)
     {
-        Cliente cliente = new Cliente { nome = nome };
+        Cliente cliente = new Cliente{Nome = nome};
         clientes.Add(cliente);
         return cliente;
     }
@@ -118,11 +118,19 @@ class Restaurante
     /// <param name="idReq">ID da requisição.</param>
     public void PedirProduto(int idProduto, int idReq)
     {
-        Produto produto = produtos.Find(p => p.id == idProduto);
-        ReqMesa req = listaRegistros.Find(r => r.idReq == idReq);
+        Produto produto = cardapio.ObterProduto(idProduto);
+        ReqMesa req = listaRegistros.Find(registro => registro.idReq == idReq);
         if (produto != null && req != null)
         {
-            req.pedido.AdicionarProduto(produto.id);
+            req.ReceberProduto(produto.id);
         }
+    }
+
+    /// <summary>
+    /// Chama o método de mostrar produtos do cardápio
+    /// </summary>
+    /// <returns>Lista de produtos do cardápio</returns>
+    public string ExibirCardapio(){
+        return cardapio.MostrarOpcoes();
     }
 }
