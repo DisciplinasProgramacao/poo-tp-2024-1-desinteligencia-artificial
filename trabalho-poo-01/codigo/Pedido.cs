@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 class Pedido
 {
-	private double TAXA_SERVICO = 0.1;
-	private int idPedido;
-	private Dictionary<int, int> produtos;
+    private double TAXA_SERVICO = 0.1;
+    private int idPedido;
+    private Dictionary<int, int> produtos;
 
-	public Pedido()
-	{
-		Random rand = new Random();
-		this.idPedido = rand.Next();
-	}
+    public Pedido()
+    {
+        Random rand = new Random();
+        this.idPedido = rand.Next();
+    }
 
     public void AdicionarProduto(int idProduto, int quantidade)
     {
@@ -27,7 +27,7 @@ class Pedido
 
     public double CalcularValorConta(Dictionary<int, double> precosProdutos)
     {
-        double total = 0.0;
+        double total = 0;
         foreach (var produto in produtos)
         {
             if (precosProdutos.ContainsKey(produto.Key))
@@ -36,7 +36,7 @@ class Pedido
             }
         }
 
-        double total += total * TAXA_SERVICO;
+        total += total * TAXA_SERVICO;
 
         return total;
     }
@@ -55,10 +55,11 @@ class Pedido
     {
         double total = this.CalcularValorConta();
 
-        if(numeroPessoas > 0)
+        if (numeroPessoas > 0)
         {
             return CalcularDividirConta(numeroPessoas, total);
-        } else
+        }
+        else
         {
             return total;
         }
