@@ -42,7 +42,7 @@
 
             if (qntPessoas > 0)
             {
-                AlocarClienteAMesa(qntPessoas);
+                AlocarClienteAMesa(qntPessoas,nome);
             }
             else
             {
@@ -52,11 +52,13 @@
         } while (qntPessoas < 1);
     }
 
-    public static void AlocarClienteAMesa(int qntPessoas)
+    public static void AlocarClienteAMesa(int qntPessoas, string nome)
     {
-        ReqMesa req = restaurante.AdicionarRequisicao(cliente, qntPessoas);
+        ReqMesa req = new ReqMesa(qntPessoas, nome);
 
-        if (req.Status() == 1)
+        bool alocado = restaurante.ProcessarRequisicao(req);
+
+        if (alocado)
         {
             Console.WriteLine("Cliente foi alocado para uma mesa com sucesso!");
         }

@@ -53,7 +53,7 @@ class Restaurante
     /// </summary>
     /// <param name="req">A requisição de mesa.</param>
     /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
-    public bool ProcessarRequicao(ReqMesa req)
+    public bool ProcessarRequisicao(ReqMesa req)
     {
         foreach (Mesa mesa in mesas)
         {
