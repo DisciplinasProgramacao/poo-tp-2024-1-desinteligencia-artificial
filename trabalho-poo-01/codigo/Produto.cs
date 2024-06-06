@@ -23,4 +23,12 @@ class Produto
         this.valor = valor;
         this.descricao = descricao;
     }
+
+    /// <summary>
+    /// Método que retorna o valor do produto.
+    /// </summary>
+    public double GetValor()
+    {
+        return this.valor;
+    }
 }

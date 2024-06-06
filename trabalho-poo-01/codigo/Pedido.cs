@@ -6,11 +6,14 @@ class Pedido
     private double TAXA_SERVICO = 0.1;
     private int idPedido;
     private Dictionary<int, int> produtos;
+    private Cardapio cardapio;
 
     public Pedido()
     {
         Random rand = new Random();
         this.idPedido = rand.Next();
+        this.produtos = new Dictionary<int, int>();
+        this.cardapio = new Cardapio();
     }
 
     public void AdicionarProduto(int idProduto, int quantidade)
@@ -25,15 +28,14 @@ class Pedido
         }
     }
 
-    public double CalcularValorConta(Dictionary<int, double> precosProdutos)
+    public double CalcularValorConta()
     {
         double total = 0;
         foreach (var produto in produtos)
         {
-            if (precosProdutos.ContainsKey(produto.Key))
-            {
-                total += produto.Value * precosProdutos[produto.Key];
-            }
+            Produto infoProduct = cardapio.ObterProduto(produto.Key);
+
+            total += produto.Value * infoProduct.GetValor();
         }
 
         total += total * TAXA_SERVICO;
