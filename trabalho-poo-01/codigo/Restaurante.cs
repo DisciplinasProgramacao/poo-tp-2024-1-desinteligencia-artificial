@@ -34,15 +34,14 @@ class Restaurante
     /// <param name="idMesa">ID da mesa a ser fechada.</param>
     /// <param name="qtdPessoas">Quantidade de pessoas que vão pagar.</param>
     /// <returns>O valor da conta se a mesa foi fechada com sucesso; caso contrário, retorna -1.</returns>
-    public double FecharConta(int idMesa, int qtdPessoas)
+    public double FecharConta(int idMesa)
     {
         ReqMesa? req = listaRegistros.Find(req => req.IdMesa == idMesa); 
         Mesa? mesa = mesas.Find(mesa => mesa.NumeroMesa == idMesa);
         if (mesa != null && req != null)
         {
             mesa.DesocuparMesa();
-            req.FecharRequisicao();
-            return req.Pedido.FecharConta(qtdPessoas);
+            return req.FecharRequisicao();
         }
 
         return -1;
