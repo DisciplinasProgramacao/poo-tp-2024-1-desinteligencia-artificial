@@ -3,16 +3,27 @@ using System.Collections.Generic;
 
 class Pedido
 {
-	private double TAXA_SERVICO = 0.1;
-	private int idPedido;
-	private Dictionary<int, int> produtos;
+    private double TAXA_SERVICO = 0.1;
+    private int idPedido;
+    private Dictionary<int, int> produtos;
+    private Cardapio cardapio;
 
-	public Pedido()
-	{
-		Random rand = new Random();
-		this.idPedido = rand.Next();
-	}
+    /// <summary>
+    /// Construtor da classe Pedido.
+    /// </summary>
+    public Pedido()
+    {
+        Random rand = new Random();
+        this.idPedido = rand.Next();
+        this.produtos = new Dictionary<int, int>();
+        this.cardapio = new Cardapio();
+    }
 
+    /// <summary>
+    /// Método que adiciona um produto ao pedido.
+    /// </summary>
+    /// <param name="idProduto">ID do produto.</param>
+    /// <param name="quantidade">Quantidade do produto.</param>
     public void AdicionarProduto(int idProduto, int quantidade)
     {
         if (produtos.ContainsKey(idProduto))
@@ -25,22 +36,29 @@ class Pedido
         }
     }
 
-    public double CalcularValorConta(Dictionary<int, double> precosProdutos)
+    /// <summary>
+    /// Método que remove um produto do pedido.
+    /// </summary>
+    public double CalcularValorConta()
     {
-        double total = 0.0;
+        double total = 0;
         foreach (var produto in produtos)
         {
-            if (precosProdutos.ContainsKey(produto.Key))
-            {
-                total += produto.Value * precosProdutos[produto.Key];
-            }
+            Produto infoProduct = cardapio.ObterProduto(produto.Key);
+
+            total += produto.Value * infoProduct.GetValor();
         }
 
-        double total += total * TAXA_SERVICO;
+        total += total * TAXA_SERVICO;
 
         return total;
     }
 
+    /// <summary>
+    /// Método que calcula o valor da conta dividido pelo número de pessoas.
+    /// </summary>
+    /// <param name="numeroPessoas">Número de pessoas.</param>
+    /// <param name="total">Valor total da conta.</param>
     public double CalcularDividirConta(int numeroPessoas, double total)
     {
         if (numeroPessoas <= 0)
@@ -51,14 +69,19 @@ class Pedido
         return total / numeroPessoas;
     }
 
+    /// <summary>
+    /// Método que fecha a conta do pedido.
+    /// </summary>
+    /// <param name="numeroPessoas">Número de pessoas.</param>
     public double FecharConta(int numeroPessoas)
     {
         double total = this.CalcularValorConta();
 
-        if(numeroPessoas > 0)
+        if (numeroPessoas > 0)
         {
             return CalcularDividirConta(numeroPessoas, total);
-        } else
+        }
+        else
         {
             return total;
         }

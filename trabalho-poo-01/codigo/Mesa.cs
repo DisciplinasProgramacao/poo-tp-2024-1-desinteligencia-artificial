@@ -3,7 +3,7 @@
 /// </summary>
 class Mesa
 {
-    // Atributos privados da classe Mesa
+    // Atributos privados da classe Mesa.
     private int numeroMesa;
     private int capacidadeMaxima;
     private bool estaOcupada;
@@ -36,4 +36,13 @@ class Mesa
         estaOcupada = false;
     }
 
+    /// <summary>
+    /// Método público para verificar a disponibilidade da mesa em relação a uma requisição de X pessoas.
+    /// </summary>
+    /// <param name="qtdPessoas">Quantidade de pessoas na requisição.</param>
+    /// <returns>True se a mesa estiver disponível e a capacidade for suficiente, caso contrário, False.</returns>
+    public bool VerificarDisponibilidade(int qtdPessoas)
+    {
+        return !estaOcupada && capacidadeMaxima >= qtdPessoas;
+    }
 }

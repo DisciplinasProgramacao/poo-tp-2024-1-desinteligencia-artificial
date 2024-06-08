@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 /// <summary>
-/// Classe que representa um restaurante.
+/// Classe que representa um restaurante, gerenciando mesas, requisições, clientes e cardápio.
 /// </summary>
 class Restaurante
 {
@@ -13,8 +13,7 @@ class Restaurante
     private Cardapio cardapio;
 
     /// <summary>
-    /// Construtor da classe Restaurante. Inicializa as listas de mesas, registros, lista de espera, clientes e cardápio.
-    /// Cria mesas com diferentes capacidades.
+    /// Inicializa uma nova instância da classe <see cref="Restaurante"/>, criando mesas e listas necessárias.
     /// </summary>
     public Restaurante()
     {
@@ -48,19 +47,16 @@ class Restaurante
     }
 
     /// <summary>
-    /// Aloca uma mesa para a requisição especificada.
+    /// Processa uma requisição de mesa, alocando uma mesa disponível ou adicionando à lista de espera.
     /// </summary>
-    /// <param name="req">Requisição de mesa.</param>
-    /// <returns>True se a mesa foi alocada com sucesso, caso contrário, False.</returns>
-    public bool AlocarMesa(ReqMesa req)
+    /// <param name="req">A requisição de mesa.</param>
+    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
+    public bool ProcessarRequisicao(ReqMesa req)
     {
         foreach (Mesa mesa in mesas)
         {
-            if (mesa.VerificarDisponibilidade(req.qtdPessoas))
+            if (AlocarMesa(req, mesa))
             {
-                mesa.OcuparMesa();
-                req.AtribuirMesaARequisicao(mesa.numeroMesa);
-                listaRegistros.Add(req);
                 return true;
             }
         }
@@ -70,30 +66,54 @@ class Restaurante
     }
 
     /// <summary>
-    /// Processa a lista de espera para alocar mesas.
+    /// Aloca uma mesa específica para uma requisição se disponível.
     /// </summary>
-    /// <returns>True se pelo menos uma requisição foi processada com sucesso, caso contrário, False.</returns>
-    public bool ProcessarListaDeEspera()
+    /// <param name="req">A requisição de mesa.</param>
+    /// <param name="mesa">A mesa a ser alocada.</param>
+    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
+    private bool AlocarMesa(ReqMesa req, Mesa mesa)
     {
+        if (mesa.VerificarDisponibilidade(req.QtdPessoas))
+        {
+            mesa.OcuparMesa();
+            req.AtribuirMesaARequisicao(mesa.NumeroMesa);
+            listaRegistros.Add(req);
+            return true;
+        }
+    
+        return false;
+    }
+
+    /// <summary>
+    /// Processa a lista de espera, alocando mesas conforme disponibilidade.
+    /// </summary>
+    /// <returns>String indicando as requisições processadas com sucesso.</returns>
+    public string ProcessarListaDeEspera()
+    {
+        string resposta = "";
         foreach (ReqMesa req in listaEspera)
         {
-            if (AlocarMesa(req))
+            foreach (Mesa mesa in mesas)
             {
-                listaEspera.Remove(req);
-                return true;
+                if (AlocarMesa(req, mesa))
+                {
+                    listaEspera.Remove(req);
+                    resposta += $"Requisição {req.IdReq} alocada com sucesso.\n";
+                }
             }
         }
-        return false;
+
+        return resposta;
     }
 
     /// <summary>
     /// Adiciona um cliente à lista de clientes.
     /// </summary>
     /// <param name="nome">Nome do cliente.</param>
-    /// <returns>O objeto Cliente adicionado.</returns>
+    /// <returns>O objeto <see cref="Cliente"/> adicionado.</returns>
     public Cliente AdicionarCliente(string nome)
     {
-        Cliente cliente = new Cliente{Nome = nome};
+        Cliente cliente = new(nome);
         clientes.Add(cliente);
         return cliente;
     }
@@ -107,7 +127,7 @@ class Restaurante
     {
         for (int i = 0; i < qtdMesas; i++)
         {
-            mesas.Add(new Mesa { numeroMesa = i + 1, capacidade = qtdPessoas, isOcupada = false });
+            mesas.Add(new Mesa(i + 1, qtdPessoas));
         }
     }
 
@@ -120,7 +140,7 @@ class Restaurante
     public void PedirProduto(int idProduto,int quantidade, int idReq)
     {
         Produto produto = cardapio.ObterProduto(idProduto);
-        ReqMesa req = listaRegistros.Find(registro => registro.idReq == idReq);
+        ReqMesa? req = listaRegistros.Find(registro => registro.IdReq == idReq);
         if (produto != null && req != null)
         {
             req.ReceberProduto(produto.id,quantidade);
@@ -128,10 +148,11 @@ class Restaurante
     }
 
     /// <summary>
-    /// Chama o método de mostrar produtos do cardápio
+    /// Exibe os produtos disponíveis no cardápio.
     /// </summary>
-    /// <returns>Lista de produtos do cardápio</returns>
-    public string ExibirCardapio(){
+    /// <returns>String com a lista de produtos do cardápio.</returns>
+    public string ExibirCardapio()
+    {
         return cardapio.MostrarOpcoes();
     }
 }
