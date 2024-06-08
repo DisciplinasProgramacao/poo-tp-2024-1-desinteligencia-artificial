@@ -32,16 +32,15 @@ class Restaurante
     /// Fecha a mesa especificada pelo ID e retorna o valor da conta.
     /// </summary>
     /// <param name="idMesa">ID da mesa a ser fechada.</param>
-    /// <param name="qtdPessoas">Quantidade de pessoas que vão pagar.</param>
     /// <returns>O valor da conta se a mesa foi fechada com sucesso, caso contrário, retorna 0.</returns>
-    public double FecharConta(int idMesa, int qtdPessoas)
+    public double FecharConta(int idMesa)
     {
-        ReqMesa req = listaRegistros.Find(req => req.idMesa == idMesa); 
+        ReqMesa req = listaRegistros.Find(req => req.idMesa == idMesa);
         Mesa mesa = mesas.Find(mesa => mesa.numeroMesa == idMesa);
         if (mesa != null)
         {
             mesa.DesocuparMesa();
-            return req.FecharRequisicao(qtdPessoas);
+            return req.FecharRequisicao();
         }
         return 0;
     }
@@ -80,7 +79,7 @@ class Restaurante
             listaRegistros.Add(req);
             return true;
         }
-    
+
         return false;
     }
 
@@ -137,14 +136,32 @@ class Restaurante
     /// <param name="idProduto">ID do produto.</param>
     /// <param name="quantidade">Quantidade de produtos.</param>
     /// <param name="idReq">ID da requisição.</param>
-    public void PedirProduto(int idProduto,int quantidade, int idReq)
+    public void PedirProduto(int idProduto, int quantidade, int idReq)
     {
         Produto produto = cardapio.ObterProduto(idProduto);
         ReqMesa? req = listaRegistros.Find(registro => registro.IdReq == idReq);
         if (produto != null && req != null)
         {
-            req.ReceberProduto(produto.id,quantidade);
+            req.ReceberProduto(produto.id, quantidade);
         }
+    }
+
+    
+    
+    /// <summary>
+    /// Pesquisa um cliente pelo nome.
+    /// </summary>
+    /// <param name="nome">Nome a ser pesquisado.</param>
+    /// <returns>Objeto cliente ou nulo se não existir na lista.</returns>
+    public Cliente PesquisarCliente(string nome)
+    {
+        Cliente cliente = clientes.Find(cliente => cliente.Nome == nome);
+        if (cliente != null)
+        {
+            return cliente;
+        }
+
+        return null;
     }
 
     /// <summary>
