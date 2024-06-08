@@ -115,14 +115,15 @@ class Restaurante
     /// Pede um produto para uma requisição específica.
     /// </summary>
     /// <param name="idProduto">ID do produto.</param>
+    /// <param name="quantidade">Quantidade de produtos.</param>
     /// <param name="idReq">ID da requisição.</param>
-    public void PedirProduto(int idProduto, int idReq)
+    public void PedirProduto(int idProduto,int quantidade, int idReq)
     {
         Produto produto = cardapio.ObterProduto(idProduto);
         ReqMesa req = listaRegistros.Find(registro => registro.idReq == idReq);
         if (produto != null && req != null)
         {
-            req.ReceberProduto(produto.id);
+            req.ReceberProduto(produto.id,quantidade);
         }
     }
 
