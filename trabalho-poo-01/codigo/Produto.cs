@@ -4,10 +4,10 @@
 class Produto
 {
     // Atributos privados da classe Produto.
-    private int id { get; set; }
-    private string nome { get; set; }
-    private double valor { get; set; }
-    private string descricao { get; set; }
+    private int id;
+    private string nome;
+    private double valor;
+    private string descricao;
 
     /// <summary>
     /// Método construtor da classe Produto.
