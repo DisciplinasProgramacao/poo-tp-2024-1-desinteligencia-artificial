@@ -39,7 +39,7 @@ class Pedido
     /// <summary>
     /// Método que remove um produto do pedido.
     /// </summary>
-    public double CalcularValorConta()
+    private double CalcularValorConta()
     {
         double total = 0;
         foreach (var produto in produtos)
