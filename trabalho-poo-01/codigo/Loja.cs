@@ -16,7 +16,7 @@ abstract class Loja
         this.mesas = new List<Mesa>();
         this.listaRegistros = new List<ReqMesa>();
         this.clientes = new List<Cliente>();
-        this.cardapio = new Cardapio();
+        this.cardapio = CriarCardapio();
 
         CriarMesas(4, 4); // 4 mesas de capacidade 4
         CriarMesas(4, 6); // 4 mesas de capacidade 6
@@ -56,6 +56,8 @@ abstract class Loja
     /// <param name="mesa">A mesa a ser alocada.</param>
     /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
     abstract protected bool AlocarMesa(ReqMesa req, Mesa mesa);
+
+    abstract protected Cardapio CriarCardapio();
 
     /// <summary>
     /// Adiciona um cliente à lista de clientes.
