@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "bXMDMJMQiL4Q+O9kKPuxR7jJXDwasjlWo4/TGlKzNcIdOZ4VbqXnhY/hTNIGKOlJt7m1I+lrFa/bRNOTpp6Kpg==",
+  "dgSpecHash": "S+ixuf8EwTg=",
   "success": true,
-  "projectFilePath": "/Users/danilo.loose/Developer/studyspace/POO/poo-tp-2024-1-desinteligencia-artificial/trabalho-poo-01/trabalho-poo-01.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Bizzi\\Desktop\\projetos\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Bizzi\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\Bizzi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\Bizzi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\Bizzi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.20\\microsoft.netcore.app.host.win-x64.7.0.20.nupkg.sha512"
+  ],
   "logs": []
 }

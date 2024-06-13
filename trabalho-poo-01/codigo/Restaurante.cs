@@ -1,55 +1,78 @@
-class Restaurante{
-    private List<Mesa> mesas;
-    private List<FilaEspera> filaDeEspera;
+using System;
+using System.Collections.Generic;
 
-    public Restaurante(){
-        this.mesas = new List<Mesa>();
-        this.filaDeEspera = new List<FilaEspera>();
+/// <summary>
+/// Classe que representa um restaurante, gerenciando mesas, requisições, clientes e cardápio.
+/// </summary>
+class Restaurante : Loja
+{
+    private List<ReqMesa> listaEspera;
 
-        CriarMesas(4, 4); // 4 mesas de capacidade 4
-        CriarMesas(4, 6); // 4 mesas de capacidade 6
-        CriarMesas(2, 8); // 2 mesas de capacidade 8
-
-        filaDeEspera.Add(new FilaEspera(4));
-        filaDeEspera.Add(new FilaEspera(6));
-        filaDeEspera.Add(new FilaEspera(8));
+    /// <summary>
+    /// Inicializa uma nova instância da classe <see cref="Restaurante"/>, criando mesas e listas necessárias.
+    /// </summary>
+    public Restaurante()
+    {
+        this.listaEspera = new List<ReqMesa>();
     }
-    
-    public void AlocarMesa(int qtdPessoa, string nome){
-        bool mesaAlocada = false;
-        foreach(Mesa mesa in mesas){
-            if(mesa.capacidade <= qtdPessoa && !mesa.isOcupada){
-                mesa.ocuparMesa();
-                mesaAlocada = true;
-                break;
+
+    /// <summary>
+    /// Processa uma requisição de mesa, alocando uma mesa disponível ou adicionando à lista de espera.
+    /// </summary>
+    /// <param name="req">A requisição de mesa.</param>
+    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
+    public override bool ProcessarRequisicao(ReqMesa req)
+    {
+        foreach (Mesa mesa in mesas)
+        {
+            if (AlocarMesa(req, mesa))
+            {
+                return true;
             }
         }
 
-        if(!mesaAlocada){
-            Mesa mesa = mesas.Find(mesa => mesa.capacidade <= qtdPessoa);
-            ReqMesa req = new ReqMesa(qtdPessoa, nome, mesa);
+        listaEspera.Add(req);
+        return false;
+    }
+
+    /// <summary>
+    /// Aloca uma mesa específica para uma requisição se disponível.
+    /// </summary>
+    /// <param name="req">A requisição de mesa.</param>
+    /// <param name="mesa">A mesa a ser alocada.</param>
+    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
+    protected override bool AlocarMesa(ReqMesa req, Mesa mesa)
+    {
+        if (mesa.VerificarDisponibilidade(req.QtdPessoas))
+        {
+            mesa.OcuparMesa();
+            req.AtribuirMesaARequisicao(mesa.NumeroMesa);
+            listaRegistros.Add(req);
+            return true;
         }
 
+        return false;
     }
-    public void DesalocarDaFilaEspera (int idReq){
-        foreach(FilaEspera fila in filaDeEspera){
-            foreach(ReqMesa req in fila.requisicoes){
-                if(req.idReq == idReq){
-                    req.FecharRequisicao();
-                    fila.RemoveRequisicao(req);
-                    return;
+
+    /// <summary>
+    /// Processa a lista de espera, alocando mesas conforme disponibilidade.
+    /// </summary>
+    /// <returns>String indicando as requisições processadas com sucesso.</returns>
+    public string ProcessarListaDeEspera()
+    {
+        string resposta = "";
+        foreach (ReqMesa req in listaEspera)
+        {
+            foreach (Mesa mesa in mesas)
+            {
+                if (AlocarMesa(req, mesa))
+                {
+                    listaEspera.Remove(req);
+                    resposta += $"Requisição {req.IdReq} alocada com sucesso.\n";
                 }
             }
         }
-    }
-    private void AlocarNaFilaEspera (ReqMesa reqMesa){
-        FilaEspera fila = filaDeEspera.Find(fila => fila.capacidadeMesa <= qtdPessoa);
-        fila.AddReq(reqMesa);
-    }
 
-    private void CriarMesas(int qtdMesas, int qtdPessoas){
-        for ( int i = 0; i < qtdMesas; i++){
-            mesas.Add(new Mesa(qtdPessoas));
-        }
+        return resposta;
     }
 }
