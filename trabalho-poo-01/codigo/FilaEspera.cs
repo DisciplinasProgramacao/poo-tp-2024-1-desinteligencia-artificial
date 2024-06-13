@@ -1,4 +1,5 @@
-class FilaEspera{
+class FilaEspera
+{
 
   private int capacidadeMesa;
   private Queue<ReqMesa> requisicoes = new Queue<ReqMesa>();
@@ -39,17 +40,4 @@ class FilaEspera{
     ReqMesa reqRemovida = requisicoes.Dequeue();
     return reqRemovida;
   }
-
-  /// <summary>
-  /// Percorre a fila para ver em qual a posição dos clientes
-  /// </summary>
-
-  public void VerFila()
-  {
-    foreach (ReqMesa r in requisicoes)
-    {
-      Console.WriteLine(r.nomeCliente);
-    }
-  }
-
 }
