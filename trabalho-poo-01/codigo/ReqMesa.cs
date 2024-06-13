@@ -9,7 +9,7 @@ public enum StatusRequisicao
 }
 
 /// <summary>
-/// Classe que armazena as requisições de uma mesa em um restaurante.
+/// Classe que armazena as requisiï¿½ï¿½es de uma mesa em um restaurante.
 /// </summary>
 class ReqMesa {
     private int idReq;
@@ -19,13 +19,14 @@ class ReqMesa {
     private DateTime dataEntrada;
     private DateTime dataSaida;
     private StatusRequisicao status;
+    private Pedido pedido;
 
     /// <summary>
-    /// Método construtor de uma requisição onde possui-se uma mesa alocada
+    /// Mï¿½todo construtor de uma requisiï¿½ï¿½o onde possui-se uma mesa alocada
     /// </summary>
     /// <param name="qtdPessoas">Quantidade de capacidade de pessoas na mesa</param>
     /// <param name="nomeCliente">Nome do cliente</param>
-    /// <param name="idMesa">Código ID da mesa que deseja ser atribuida</param>
+    /// <param name="idMesa">Cï¿½digo ID da mesa que deseja ser atribuida</param>
     public ReqMesa(int qtdPessoas, string nomeCliente, int idMesa)
     {
         Random random = new Random();
@@ -35,10 +36,11 @@ class ReqMesa {
         this.idMesa = idMesa;
         this.dataEntrada = DateTime.Now;
         this.status = StatusRequisicao.EmEspera;
+        this.pedido = new Pedido();
     }
 
     /// <summary>
-    /// Método construtor de uma requisição onde não possui-se uma mesa, feita para inserir na FilaDeEspera
+    /// Mï¿½todo construtor de uma requisiï¿½ï¿½o onde nï¿½o possui-se uma mesa, feita para inserir na FilaDeEspera
     /// </summary>
     /// <param name="qtdPessoas">Quantidade de capacidade de pessoas na mesa</param>
     /// <param name="nomeCliente">Nome do cliente</param>
@@ -50,23 +52,34 @@ class ReqMesa {
         this.nomeCliente = nomeCliente;
         this.dataEntrada = DateTime.Now;
         this.status = StatusRequisicao.EmEspera;
+        this.pedido = new Pedido();
     }
 
     /// <summary>
-    /// Método para fechar a requisição aberta, consiste em definir a data de saída para a requisição. Também, altera o status da requisição para finalizada
-    public void FecharRequisicao() {
+    /// Mï¿½todo para fechar a requisiï¿½ï¿½o aberta, consiste em definir a data de saï¿½da para a requisiï¿½ï¿½o. Tambï¿½m, altera o status da requisiï¿½ï¿½o para finalizada
     /// </summary>
+    public double FecharRequisicao() {
         this.dataSaida = DateTime.Now;
         this.status = StatusRequisicao.Finalizada;
+        return pedido.FecharConta(qtdPessoas);
     }
 
     /// <summary>
-    /// Método para atribuir uma mesa a requisição e alterar o status da requisição para atendendo
+    /// Mï¿½todo para atribuir uma mesa a requisiï¿½ï¿½o e alterar o status da requisiï¿½ï¿½o para atendendo
     /// </summary>
-    /// <param name="idMesa">Código ID da mesa que deseja ser atribuida</param>
+    /// <param name="idMesa">Cï¿½digo ID da mesa que deseja ser atribuida</param>
     public void AtribuirMesaARequisicao(int idMesa)
     {
         this.idMesa = idMesa;
         this.status = StatusRequisicao.Atendendo;
+    }
+
+    /// <summary>
+    /// MÃ©todo para receber os produtos e suas quantidades desejadas para adicionar ao pedido.
+    /// </summary>
+    /// <param name="idProduto">Identificador do produto desejado</param>
+    /// <param name="quantidade">Quantidade do produto desejado</param>
+    public void ReceberProdutos(int idProduto, int quantidade) {
+        pedido.AdicionarProduto(idProduto,quantidade);
     }
 }

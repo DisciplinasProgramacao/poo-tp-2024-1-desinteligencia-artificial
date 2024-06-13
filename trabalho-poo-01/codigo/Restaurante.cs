@@ -32,12 +32,13 @@ class Restaurante
     /// Fecha a mesa especificada pelo ID e retorna o valor da conta.
     /// </summary>
     /// <param name="idMesa">ID da mesa a ser fechada.</param>
-    /// <returns>O valor da conta se a mesa foi fechada com sucesso, caso contrário, retorna 0.</returns>
+    /// <param name="qtdPessoas">Quantidade de pessoas que vão pagar.</param>
+    /// <returns>O valor da conta se a mesa foi fechada com sucesso; caso contrário, retorna -1.</returns>
     public double FecharConta(int idMesa)
     {
-        ReqMesa req = listaRegistros.Find(req => req.idMesa == idMesa);
-        Mesa mesa = mesas.Find(mesa => mesa.numeroMesa == idMesa);
-        if (mesa != null)
+        ReqMesa? req = listaRegistros.Find(req => req.IdMesa == idMesa);
+        Mesa? mesa = mesas.Find(mesa => mesa.NumeroMesa == idMesa);
+        if (mesa != null && req != null)
         {
             mesa.DesocuparMesa();
             return req.FecharRequisicao();
@@ -171,5 +172,16 @@ class Restaurante
     public string ExibirCardapio()
     {
         return cardapio.MostrarOpcoes();
+    }
+
+    /// <summary>
+    /// Pesquisa um cliente pelo nome.
+    /// </summary>
+    /// <param name="nome">Nome a ser pesquisado.</param>
+    /// <returns>Objeto cliente ou nulo se não existir na lista.</returns>
+    public Cliente? PesquisarCliente(string nome)
+    {
+        Cliente? cliente = clientes.Find(cliente => cliente.Nome == nome);
+        return cliente;
     }
 }
