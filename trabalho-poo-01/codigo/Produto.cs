@@ -4,10 +4,10 @@
 class Produto
 {
     // Atributos privados da classe Produto.
-    private int id { get; private set; }
-    private string nome { get; private set; }
-    private double valor { get; private set; }
-    private string descricao { get; private set; }
+    private int id { get; set; }
+    private string nome { get; set; }
+    private double valor { get; set; }
+    private string descricao { get; set; }
 
     /// <summary>
     /// Método construtor da classe Produto.
@@ -25,10 +25,34 @@ class Produto
     }
 
     /// <summary>
+    /// Método que retorna o id do produto.
+    /// </summary>
+    public int GetId()
+    {
+        return this.id;
+    }
+
+    /// <summary>
+    /// Método que retorna o nome do produto.
+    /// </summary>
+    public string GetNome()
+    {
+        return this.nome;
+    }
+
+    /// <summary>
     /// Método que retorna o valor do produto.
     /// </summary>
     public double GetValor()
     {
         return this.valor;
+    }
+
+    /// <summary>
+    /// Método que retorna a descrição do produto.
+    /// </summary>
+    public string GetDescricao()
+    {
+        return this.descricao;
     }
 }
