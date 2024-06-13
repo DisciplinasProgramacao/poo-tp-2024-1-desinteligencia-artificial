@@ -9,6 +9,13 @@ class Mesa
     private bool estaOcupada;
 
     /// <summary>
+    /// Método que retorna o número da mesa.
+    /// </summary>
+    public int NumeroMesa{
+        get => numeroMesa;
+    }
+
+    /// <summary>
     /// Método construtor da classe Mesa.
     /// </summary>
     /// <param name="numeroMesa">O número identificador da mesa.</param>
