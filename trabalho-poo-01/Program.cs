@@ -1,11 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Classe principal do programa que gerencia o fluxo do Restaurante e do Café.
+/// </summary>
 class Program
 {
     static Restaurante restaurante = new Restaurante();
     static Cafe cafe = new Cafe();
 
+    /// <summary>
+    /// Método para cadastrar um novo cliente no sistema.
+    /// </summary>
     public static void CadastrarCliente()
     {
         Console.WriteLine("Digite o nome do cliente para cadastro no sistema:");
@@ -23,6 +29,9 @@ class Program
         }
     }
 
+    /// <summary>
+    /// Método para atender um cliente, verificando se está cadastrado e alocando uma mesa.
+    /// </summary>
     public static void AtenderCliente()
     {
         Console.WriteLine("Digite o nome do cliente para atendê-lo:");
@@ -56,6 +65,11 @@ class Program
         } while (qntPessoas < 1);
     }
 
+    /// <summary>
+    /// Método para alocar uma mesa para o cliente.
+    /// </summary>
+    /// <param name="qntPessoas">Quantidade de pessoas que vão sentar à mesa.</param>
+    /// <param name="nome">Nome do cliente.</param>
     public static void AlocarClienteAMesa(int qntPessoas, string nome)
     {
         ReqMesa req = new ReqMesa(qntPessoas, nome);
@@ -72,16 +86,28 @@ class Program
         }
     }
 
+    /// <summary>
+    /// Método para exibir o cardápio do restaurante.
+    /// </summary>
+    /// <param name="restaurante">Instância do restaurante.</param>
     public static void MostrarCardapio(Restaurante restaurante)
     {
         Console.WriteLine(restaurante.ExibirCardapio());
     }
 
+    /// <summary>
+    /// Método para exibir o cardápio do café.
+    /// </summary>
+    /// <param name="cafe">Instância do café.</param>
     public static void MostrarCardapio(Cafe cafe)
     {
         Console.WriteLine(cafe.ExibirCardapio());
     }
 
+    /// <summary>
+    /// Método principal do programa, exibe o menu principal e gerencia a navegação.
+    /// </summary>
+    /// <param name="args">Argumentos de linha de comando.</param>
     static void Main(string[] args)
     {
         int opcao;
@@ -115,6 +141,9 @@ class Program
         } while (opcao != 3);
     }
 
+    /// <summary>
+    /// Método para exibir o menu do restaurante e gerenciar as opções.
+    /// </summary>
     static void MenuRestaurante()
     {
         int opcaoRestaurante;
@@ -185,19 +214,27 @@ class Program
         } while (opcaoRestaurante != 10);
     }
 
+    /// <summary>
+    /// Método para listar a fila de espera do restaurante.
+    /// </summary>
     public static void ListarFilaDeEspera()
     {
         Console.WriteLine("Lista de fila de espera:");
+        //podemos implementar esse metodo la?
         foreach (var req in restaurante.ListarFilaDeEspera())
         {
             Console.WriteLine($"Cliente: {req.NomeCliente}, Quantidade de pessoas: {req.QtdPessoas}");
         }
     }
 
+    /// <summary>
+    /// Método para anotar o pedido de uma mesa.
+    /// </summary>
     public static void AnotarPedidoMesa()
     {
         Console.WriteLine("Digite o número da mesa:");
         int numeroMesa = int.Parse(Console.ReadLine());
+
         Mesa mesa = restaurante.PesquisarMesa(numeroMesa);
 
         if (mesa == null)
@@ -208,6 +245,7 @@ class Program
 
         Console.WriteLine("Digite o código do produto:");
         int codigoProduto = int.Parse(Console.ReadLine());
+        //seria bacana para buscar os produtos 
         Produto produto = restaurante.PesquisarProduto(codigoProduto);
 
         if (produto == null)
@@ -218,25 +256,30 @@ class Program
 
         Console.WriteLine("Digite a quantidade:");
         int quantidade = int.Parse(Console.ReadLine());
-        
-        //precisaria pegar o numero da mesa 
+
         ReqMesa req = new ReqMesa(quantidade, mesa.NumeroMesa);
-        restaurante.PedirProduto(produto.GetId(), quantidade, req.GetId());
+        restaurante.PedirProduto(produto.GetId(), quantidade, req.IdReq);
 
         Console.WriteLine("Pedido anotado com sucesso.");
     }
 
+    /// <summary>
+    /// Método para adicionar uma nova mesa ao restaurante.
+    /// </summary>
     public static void AdicionarMesa()
     {
         Console.WriteLine("Digite o número da nova mesa:");
         int numeroMesa = int.Parse(Console.ReadLine());
         Console.WriteLine("Digite a capacidade máxima da mesa:");
         int capacidade = int.Parse(Console.ReadLine());
-
+        //criar uma mesa nova 
         restaurante.CriarMesa(numeroMesa, capacidade);
         Console.WriteLine("Mesa adicionada com sucesso.");
     }
 
+    /// <summary>
+    /// Método para adicionar um novo produto ao cardápio do restaurante.
+    /// </summary>
     public static void AdicionarProduto()
     {
         Console.WriteLine("Digite o código do novo produto:");
@@ -249,10 +292,14 @@ class Program
         double valor = double.Parse(Console.ReadLine());
 
         Produto produto = new Produto(codigo, nome, valor, descricao);
+        //pendente a criação de um produto novo 
         restaurante.AddProduto(produto);
         Console.WriteLine("Produto adicionado com sucesso.");
     }
 
+    /// <summary>
+    /// Método para mostrar a conta de uma mesa.
+    /// </summary>
     public static void MostrarConta()
     {
         Console.WriteLine("Digite o número da mesa:");
@@ -270,6 +317,9 @@ class Program
         Console.WriteLine($"Total: R$ {total:F2}");
     }
 
+    /// <summary>
+    /// Método para fechar a conta de uma mesa.
+    /// </summary>
     public static void FecharConta()
     {
         Console.WriteLine("Digite o número da mesa:");
@@ -282,10 +332,13 @@ class Program
             return;
         }
 
-        double total = restaurante.FecharConta(mesa.NumeroMesa);
+        double total = restaurante.FecharConta(mesa.numeroMesa);
         Console.WriteLine($"Conta da mesa {numeroMesa} fechada. Total: R$ {total:F2}");
     }
 
+    /// <summary>
+    /// Método para exibir o menu do café e gerenciar as opções.
+    /// </summary>
     static void MenuCafe()
     {
         int opcaoCafe;
