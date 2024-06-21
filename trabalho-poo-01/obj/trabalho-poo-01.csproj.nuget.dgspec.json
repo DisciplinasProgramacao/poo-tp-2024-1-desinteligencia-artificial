@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bizzi\\Desktop\\projetos\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj": {}
+    "C:\\Users\\jeanc\\OneDrive\\Área de Trabalho\\TrabalhoPOO\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bizzi\\Desktop\\projetos\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj": {
+    "C:\\Users\\jeanc\\OneDrive\\Área de Trabalho\\TrabalhoPOO\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bizzi\\Desktop\\projetos\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj",
+        "projectUniqueName": "C:\\Users\\jeanc\\OneDrive\\Área de Trabalho\\TrabalhoPOO\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj",
         "projectName": "trabalho-poo-01",
-        "projectPath": "C:\\Users\\Bizzi\\Desktop\\projetos\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj",
-        "packagesPath": "C:\\Users\\Bizzi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bizzi\\Desktop\\projetos\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\obj\\",
+        "projectPath": "C:\\Users\\jeanc\\OneDrive\\Área de Trabalho\\TrabalhoPOO\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\trabalho-poo-01.csproj",
+        "packagesPath": "C:\\Users\\jeanc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jeanc\\OneDrive\\Área de Trabalho\\TrabalhoPOO\\poo-tp-2024-1-desinteligencia-artificial\\trabalho-poo-01\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Bizzi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\jeanc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -59,30 +50,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
