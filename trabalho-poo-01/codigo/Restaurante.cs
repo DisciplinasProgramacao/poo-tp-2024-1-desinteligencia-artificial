@@ -46,24 +46,7 @@ class Restaurante : Loja
         return false;
     }
 
-    /// <summary>
-    /// Aloca uma mesa específica para uma requisição se disponível.
-    /// </summary>
-    /// <param name="req">A requisição de mesa.</param>
-    /// <param name="mesa">A mesa a ser alocada.</param>
-    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
-    protected override bool AlocarMesa(ReqMesa req, Mesa mesa)
-    {
-        if (mesa.VerificarDisponibilidade(req.QtdPessoas))
-        {
-            mesa.OcuparMesa();
-            req.AtribuirMesaARequisicao(mesa.NumeroMesa);
-            listaRegistros.Add(req);
-            return true;
-        }
-
-        return false;
-    }
+    
 
     /// <summary>
     /// Processa a lista de espera, alocando mesas conforme disponibilidade.

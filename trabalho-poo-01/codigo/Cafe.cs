@@ -17,23 +17,7 @@ class Cafe : Loja
         CriarMesa(8);
         CriarMesa(8);
     }
-    /// <summary>
-    /// Aloca uma mesa específica para uma requisição se disponível.
-    /// </summary>
-    /// <param name="req">A requisição de mesa.</param>
-    /// <param name="mesa">A mesa a ser alocada.</param>
-    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
-    protected override bool AlocarMesa(ReqMesa req, Mesa mesa)
-    {
-        if (mesa.VerificarDisponibilidade(req.QtdPessoas))
-        {
-            mesa.OcuparMesa();
-            listaRegistros.Add(req);
-            return true;
-        }
 
-        return false;
-    }
 
     /// <summary>
     /// Processa uma requisição de mesa, alocando uma mesa disponível ou adicionando à lista de espera.
