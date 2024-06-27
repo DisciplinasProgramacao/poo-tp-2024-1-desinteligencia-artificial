@@ -1,7 +1,7 @@
 class Cliente
 {
 
-    public string nome;
+    private string nome;
 
     /// <summary>
     /// Inicializa uma nova instância da classe Cliente com o nome fornecido.
