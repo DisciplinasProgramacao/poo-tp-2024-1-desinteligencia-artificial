@@ -34,7 +34,7 @@ abstract class Loja
     /// </summary>
     /// <param name="idMesa">ID da mesa a ser fechada.</param>
     /// <returns>O valor da conta se a mesa foi fechada com sucesso; caso contrário, retorna -1.</returns>
-    public double FecharConta(int idMesa)
+    public string FecharConta(int idMesa)
     {
         ReqMesa? req = listaRegistros.Find(req => req.IdMesa == idMesa);
         Mesa? mesa = mesas.Find(mesa => mesa.NumeroMesa == idMesa);
@@ -44,7 +44,7 @@ abstract class Loja
             return req.FecharRequisicao();
         }
 
-        return -1;
+        return "Mesa não encontrada!";
     }
 
     /// <summary>

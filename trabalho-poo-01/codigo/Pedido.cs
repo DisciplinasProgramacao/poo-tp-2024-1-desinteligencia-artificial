@@ -69,19 +69,21 @@ class Pedido
     /// Método que fecha a conta do pedido.
     /// </summary>
     /// <param name="numeroPessoas">Número de pessoas.</param>
-    public double FecharConta(int numeroPessoas)
-    {
-        double total = this.CalcularValorConta();
+    /// <returns> Valor total do pedido e valor dividido para a quantidade de pessoas.</returns>      
+    public string FecharConta(int numeroPessoas)
+{
+    double total = this.CalcularValorConta();
+    string conta = $"Valor total da conta {total}";
 
-        // TODO: ADICIONAR 10%
-        // TODO: MUDAR PARA STRING
-        if (numeroPessoas > 0)
-        {
-            return CalcularDividirConta(numeroPessoas, total);
-        }
-        else
-        {
-            return total;
-        }
+    if (numeroPessoas > 1)
+    {
+        double totalDividido = CalcularDividirConta(numeroPessoas, total);
+        return $"{conta} - Valor da conta por pessoa: {totalDividido}";
     }
+    else
+    {
+        return conta;
+    }
+}
+
 }

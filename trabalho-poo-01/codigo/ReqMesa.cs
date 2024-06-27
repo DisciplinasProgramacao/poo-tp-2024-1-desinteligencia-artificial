@@ -92,7 +92,7 @@ class ReqMesa
     /// <summary>
     /// M�todo para fechar a requisi��o aberta, consiste em definir a data de sa�da para a requisi��o. Tamb�m, altera o status da requisi��o para finalizada
     /// </summary>
-    public double FecharRequisicao()
+    public string FecharRequisicao()
     {
         this.dataSaida = DateTime.Now;
         this.status = StatusRequisicao.Finalizada;
