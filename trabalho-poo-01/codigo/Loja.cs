@@ -52,17 +52,21 @@ abstract class Loja
         return "Mesa não encontrada!";
     }
 
-    public string ListarMesasOcupadas()
+    public string ListarMesas()
     {
-        string mesasOcupadas = "Mesas ocupadas:\n";
+        string statusMesas = "Status das mesas:\n";
         foreach (var mesa in mesas)
         {
             if (mesa.EstaOcupada)
             {
-                mesasOcupadas += $"Mesa {mesa.NumeroMesa}\n";
+                statusMesas += $"Mesa {mesa.NumeroMesa} está ocupada\n";
+            }
+            else
+            {
+                statusMesas += $"Mesa {mesa.NumeroMesa} está livre\n";
             }
         }
-        return mesasOcupadas;
+        return statusMesas;
     }
 
     /// <summary>
