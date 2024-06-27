@@ -72,7 +72,7 @@ class Program
             Console.WriteLine("Digite uma quantidade válida!");
         }
 
-        AlocarClienteAMesa(qntPessoas, nome);
+        AlocarClienteAMesa(qntPessoas, nome, loja);
     }
 
     /// <summary>
@@ -80,11 +80,11 @@ class Program
     /// </summary>
     /// <param name="qntPessoas">Quantidade de pessoas que vão sentar à mesa.</param>
     /// <param name="nome">Nome do cliente.</param>
-    private static void AlocarClienteAMesa(int qntPessoas, string nome)
+    private static void AlocarClienteAMesa(int qntPessoas, string nome, Loja loja)
     {
         ReqMesa req = new ReqMesa(qntPessoas, nome);
 
-        bool alocado = restaurante.ProcessarRequisicao(req);
+        bool alocado = loja.ProcessarRequisicao(req);
 
         if (alocado)
         {
@@ -145,7 +145,6 @@ class Program
             return;
         }
 
-        // TODO: MOSTRAR CARDÁPIO
         Console.WriteLine("Digite o código do produto:");
         int codigoProduto = int.Parse(Console.ReadLine());
         Produto? produto = loja.PesquisarProduto(codigoProduto);
@@ -251,42 +250,35 @@ class Program
                 continue;
             }
 
+            Console.WriteLine();
+
             switch (opcao)
             {
                 case 1:
-                    Console.Clear();
                     CadastrarCliente(cafe);
                     break;
                 case 2:
-                    Console.Clear();
                     AtenderCliente(cafe);
                     break;
                 case 3:
-                    Console.Clear();
                     ListarMesas(cafe);
                     break;
                 case 4:
-                    Console.Clear();
                     AnotarPedidoMesa(cafe);
                     break;
                 case 5:
-                    Console.Clear();
                     AdicionarMesa(cafe);
                     break;
                 case 6:
-                    Console.Clear();
                     AdicionarProduto(cafe);
                     break;
                 case 7:
-                    Console.Clear();
                     MostrarCardapio(cafe);
                     break;
                 case 8:
-                    Console.Clear();
                     FecharConta(cafe);
                     break;
                 case 9:
-                    Console.Clear();
                     return;
                 default:
                     Console.WriteLine("Opção inválida, digite novamente!");
@@ -330,50 +322,41 @@ class Program
                 continue;
             }
 
+            Console.WriteLine();
+
             switch (opcao)
             {
                 case 1:
-                    Console.Clear();
                     CadastrarCliente(restaurante);
                     break;
                 case 2:
-                    Console.Clear();
                     AtenderCliente(restaurante);
                     break;
                 case 3:
-                    Console.Clear();
                     ListarFilaDeEspera();
                     break;
                 case 4:
-                    Console.Clear();
                     AtenderFilaDeEspera();
                     break;
                 case 5:
-                    Console.Clear();
                     ListarMesas(restaurante);
                     break;
                 case 6:
-                    Console.Clear();
                     AnotarPedidoMesa(restaurante);
                     break;
                 case 7:
-                    Console.Clear();
                     AdicionarMesa(restaurante);
                     break;
                 case 8:
-                    Console.Clear();
                     AdicionarProduto(restaurante);
                     break;
                 case 9:
-                    Console.Clear();
                     MostrarCardapio(restaurante);
                     break;
                 case 10:
-                    Console.Clear();
                     FecharConta(restaurante);
                     break;
                 case 11:
-                    Console.Clear();
                     return;
                 default:
                     Console.WriteLine("Opção inválida, digite novamente!");

@@ -72,16 +72,24 @@ class Restaurante : Loja
     public string ProcessarListaDeEspera()
     {
         string resposta = "";
+        List<ReqMesa> reqAExcluir = new List<ReqMesa>();
+
         foreach (ReqMesa req in listaEspera)
         {
             foreach (Mesa mesa in mesas)
             {
                 if (AlocarMesa(req, mesa))
                 {
-                    listaEspera.Remove(req);
+                    reqAExcluir.Add(req);
                     resposta += $"Requisição {req.IdReq} alocada com sucesso.\n";
+                    break;
                 }
             }
+        }
+
+        foreach (ReqMesa req in reqAExcluir)
+        {
+            listaEspera.Remove(req);
         }
 
         if (resposta == "")
@@ -101,9 +109,14 @@ class Restaurante : Loja
 
         string lista = "Lista de fila de espera: \n";
 
+        if (listaEspera.Count == 0)
+        {
+            return "Não há requisições em espera.";
+        }
+
         foreach (ReqMesa req in listaEspera)
         {
-            lista += $"Cliente: {req.NomeCliente}, Quantidade de pessoas: {req.QtdPessoas}";
+            lista += $"Cliente: {req.NomeCliente}, Quantidade de pessoas: {req.QtdPessoas} \n";
         }
 
         return lista;
