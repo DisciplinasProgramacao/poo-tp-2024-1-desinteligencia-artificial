@@ -364,13 +364,13 @@ class Program
                     MostrarCardapio(restaurante);
                     break;
                 case 10:
-                    FecharConta(restaurante);
-                    break;
-                case 11:
                     Console.WriteLine(restaurante.ListarClientes());
                     break;
-                case 12:
+                case 11:
                     Console.WriteLine(restaurante.listaRegistrosAtendimentos());
+                    break;
+                case 12:
+                    FecharConta(restaurante);
                     break;
                 case 13:
                     return;
