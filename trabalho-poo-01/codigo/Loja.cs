@@ -80,7 +80,7 @@ abstract class Loja
         string lista = "Lista de atendimentos: \n";
         foreach (var req in listaRegistros)
         {
-            lista += $"Requisição: {req.IdReq} - Mesa: {req.IdMesa} - Status: {req.Status} - NomeCliente: {req.NomeCliente} \n";
+            lista += $"Requisição: {req.IdReq} - Mesa: {req.IdMesa} - Status: {req.Status} - NomeCliente: {req.NomeCliente} \n \n";
         }
         return lista;
     }
