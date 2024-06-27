@@ -18,6 +18,11 @@ class Mesa
         get => numeroMesa;
     }
 
+    public int CapacidadeMaxima
+    {
+        get => capacidadeMaxima;
+    }
+
     public bool EstaOcupada
     {
         get => estaOcupada;

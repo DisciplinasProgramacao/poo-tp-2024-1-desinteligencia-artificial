@@ -18,14 +18,16 @@ abstract class Loja
         this.clientes = new List<Cliente>();
         this.cardapio = CriarCardapio();
 
-
-        int[] quantidades = { 4, 4, 2 };
-        int[] capacidades = { 4, 6, 8 };
-
-        for (int i = 0; i < quantidades[i]; i++)
-        {
-            CriarMesa(capacidades[i]);
-        }
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(8);
+        CriarMesa(8);
 
     }
 
@@ -54,16 +56,16 @@ abstract class Loja
 
     public string ListarMesas()
     {
-        string statusMesas = "Status das mesas:\n";
+        string statusMesas = $"Status das {mesas.Count} mesas:\n";
         foreach (var mesa in mesas)
         {
             if (mesa.EstaOcupada)
             {
-                statusMesas += $"Mesa {mesa.NumeroMesa} está ocupada\n";
+                statusMesas += $"Mesa {mesa.NumeroMesa} ({mesa.CapacidadeMaxima} lugares) está ocupada\n";
             }
             else
             {
-                statusMesas += $"Mesa {mesa.NumeroMesa} está livre\n";
+                statusMesas += $"Mesa {mesa.NumeroMesa} ({mesa.CapacidadeMaxima} lugares) está livre\n";
             }
         }
         return statusMesas;
