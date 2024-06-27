@@ -61,6 +61,7 @@ class Restaurante : Loja
     public string ProcessarListaDeEspera()
     {
         string resposta = "";
+        // TODO: Corrigir erro de iteração e remoção simultânea.
         foreach (ReqMesa req in listaEspera)
         {
             foreach (Mesa mesa in mesas)
@@ -73,6 +74,11 @@ class Restaurante : Loja
             }
         }
 
+        if (resposta == "")
+        {
+            resposta = "Nenhuma requisição foi alocada.";
+        }
+
         return resposta;
     }
 
@@ -83,7 +89,7 @@ class Restaurante : Loja
     public string ListarFilaDeEspera()
     {
 
-        string lista = "Lista de fila de espera:";
+        string lista = "Lista de fila de espera: \n";
 
         foreach (ReqMesa req in listaEspera)
         {

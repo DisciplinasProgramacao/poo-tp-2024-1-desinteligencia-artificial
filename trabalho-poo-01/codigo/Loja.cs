@@ -38,7 +38,7 @@ abstract class Loja
     /// <returns>O valor da conta se a mesa foi fechada com sucesso; caso contrário, retorna -1.</returns>
     public string FecharConta(int idMesa)
     {
-        ReqMesa? req = listaRegistros.Find(req => req.IdMesa == idMesa);
+        ReqMesa? req = ObterRequisicaoPorMesa(idMesa);
         Mesa? mesa = mesas.Find(mesa => mesa.NumeroMesa == idMesa);
         if (mesa != null && req != null)
         {
@@ -93,11 +93,17 @@ abstract class Loja
     /// </summary>
     /// <param name="nome">Nome do cliente.</param>
     /// <returns>O objeto <see cref="Cliente"/> adicionado.</returns>
-    public Cliente AdicionarCliente(string nome)
+    public Cliente? AdicionarCliente(string nome)
     {
-        Cliente cliente = new(nome);
-        clientes.Add(cliente);
-        return cliente;
+        Cliente? cliente = PesquisarCliente(nome);
+        if (cliente == null)
+        {
+            Cliente clienteCriado = new Cliente(nome);
+            clientes.Add(clienteCriado);
+            return clienteCriado;
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -116,11 +122,10 @@ abstract class Loja
     /// <param name="idProduto">ID do produto.</param>
     /// <param name="quantidade">Quantidade do produto.</param>
     /// <param name="idReq">ID da requisição.</param>
-    public string PedirProduto(int idProduto, int quantidade, int idReq)
+    public string PedirProduto(int idProduto, int quantidade, ReqMesa req)
     {
         Produto? produto = cardapio.ObterProduto(idProduto);
-        ReqMesa? req = listaRegistros.Find(registro => registro.IdReq == idReq);
-        if (produto != null && req != null)
+        if (produto != null)
         {
             if (req.Status != StatusRequisicao.Atendendo)
             {
@@ -128,7 +133,7 @@ abstract class Loja
             }
 
             req.ReceberProdutos(produto, quantidade);
-            return $"Produto {produto.GetNome()} adicionado à mesa {req.IdMesa}";
+            return $"Produto {produto.GetNome()} ({quantidade}) adicionado à mesa {req.IdMesa}";
         }
 
         return "Produto ou mesa não encontrados!";
@@ -178,7 +183,7 @@ abstract class Loja
 
     public ReqMesa? ObterRequisicaoPorMesa(int idMesa)
     {
-        ReqMesa? req = listaRegistros.Find(req => req.IdMesa == idMesa);
+        ReqMesa? req = listaRegistros.Find(req => req.IdMesa == idMesa && req.Status == StatusRequisicao.Atendendo);
         return req;
     }
 

@@ -14,7 +14,6 @@ class Cafe : Loja
         if (mesa.VerificarDisponibilidade(req.QtdPessoas))
         {
             mesa.OcuparMesa();
-            // TODO: Só na hora de fechar
             listaRegistros.Add(req);
             return true;
         }

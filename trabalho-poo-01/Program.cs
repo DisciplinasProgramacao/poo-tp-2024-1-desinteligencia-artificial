@@ -23,7 +23,7 @@ class Program
             CadastrarCliente(loja);
         }
 
-        Cliente cliente = loja.AdicionarCliente(nome);
+        Cliente? cliente = loja.AdicionarCliente(nome);
 
         if (cliente != null)
         {
@@ -114,6 +114,14 @@ class Program
     }
 
     /// <summary>
+    /// Método para atender a fila de espera do restaurante.
+    /// </summary>
+    public static void AtenderFilaDeEspera()
+    {
+        Console.WriteLine(restaurante.ProcessarListaDeEspera());
+    }
+
+    /// <summary>
     /// Método para listar as mesas do restaurante.
     /// </summary>
     public static void ListarMesas(Loja loja)
@@ -159,7 +167,7 @@ class Program
             return;
         }
 
-        string resposta = loja.PedirProduto(codigoProduto, quantidade, req.IdReq);
+        string resposta = loja.PedirProduto(codigoProduto, quantidade, req);
         Console.WriteLine(resposta);
     }
 
@@ -224,8 +232,15 @@ class Program
             Console.WriteLine();
             Console.WriteLine("---- MENU CAFÉ ----");
             Console.WriteLine("Digite a opção desejada:");
-            Console.WriteLine("1) Ver o cardápio");
-            Console.WriteLine("2) Voltar ao menu principal");
+            Console.WriteLine("1) Cadastrar cliente.");
+            Console.WriteLine("2) Atender cliente.");
+            Console.WriteLine("3) Ver mesas.");
+            Console.WriteLine("4) Anotar pedido da mesa.");
+            Console.WriteLine("5) Adicionar mesa.");
+            Console.WriteLine("6) Adicionar produto.");
+            Console.WriteLine("7) Ver o cardápio");
+            Console.WriteLine("8) Fechar conta");
+            Console.WriteLine("9) Voltar ao menu principal");
             Console.WriteLine("--------------------------");
 
             bool opcaoValida = int.TryParse(Console.ReadLine(), out opcao);
@@ -240,16 +255,44 @@ class Program
             {
                 case 1:
                     Console.Clear();
-                    MostrarCardapio(cafe);
+                    CadastrarCliente(cafe);
                     break;
                 case 2:
+                    Console.Clear();
+                    AtenderCliente(cafe);
+                    break;
+                case 3:
+                    Console.Clear();
+                    ListarMesas(cafe);
+                    break;
+                case 4:
+                    Console.Clear();
+                    AnotarPedidoMesa(cafe);
+                    break;
+                case 5:
+                    Console.Clear();
+                    AdicionarMesa(cafe);
+                    break;
+                case 6:
+                    Console.Clear();
+                    AdicionarProduto(cafe);
+                    break;
+                case 7:
+                    Console.Clear();
+                    MostrarCardapio(cafe);
+                    break;
+                case 8:
+                    Console.Clear();
+                    FecharConta(cafe);
+                    break;
+                case 9:
                     Console.Clear();
                     return;
                 default:
                     Console.WriteLine("Opção inválida, digite novamente!");
                     break;
             }
-        } while (opcao != 2);
+        } while (opcao != 9);
     }
 
     /// <summary>
@@ -269,13 +312,14 @@ class Program
             Console.WriteLine("1) Cadastrar cliente.");
             Console.WriteLine("2) Atender cliente.");
             Console.WriteLine("3) Listar fila de espera.");
-            Console.WriteLine("4) Ver mesas.");
-            Console.WriteLine("5) Anotar pedido da mesa.");
-            Console.WriteLine("6) Adicionar mesa.");
-            Console.WriteLine("7) Adicionar produto.");
-            Console.WriteLine("8) Ver o cardápio");
-            Console.WriteLine("9) Fechar conta");
-            Console.WriteLine("10) Voltar ao menu principal");
+            Console.WriteLine("4) Atender fila de espera.");
+            Console.WriteLine("5) Ver mesas.");
+            Console.WriteLine("6) Anotar pedido da mesa.");
+            Console.WriteLine("7) Adicionar mesa.");
+            Console.WriteLine("8) Adicionar produto.");
+            Console.WriteLine("9) Ver o cardápio");
+            Console.WriteLine("10) Fechar conta");
+            Console.WriteLine("11) Voltar ao menu principal");
             Console.WriteLine("--------------------------");
 
             bool opcaoValida = int.TryParse(Console.ReadLine(), out opcao);
@@ -302,36 +346,40 @@ class Program
                     break;
                 case 4:
                     Console.Clear();
-                    ListarMesas(restaurante);
+                    AtenderFilaDeEspera();
                     break;
                 case 5:
                     Console.Clear();
-                    AnotarPedidoMesa(restaurante);
+                    ListarMesas(restaurante);
                     break;
                 case 6:
                     Console.Clear();
-                    AdicionarMesa(restaurante);
+                    AnotarPedidoMesa(restaurante);
                     break;
                 case 7:
                     Console.Clear();
-                    AdicionarProduto(restaurante);
+                    AdicionarMesa(restaurante);
                     break;
                 case 8:
                     Console.Clear();
-                    MostrarCardapio(restaurante);
+                    AdicionarProduto(restaurante);
                     break;
                 case 9:
                     Console.Clear();
-                    FecharConta(restaurante);
+                    MostrarCardapio(restaurante);
                     break;
                 case 10:
+                    Console.Clear();
+                    FecharConta(restaurante);
+                    break;
+                case 11:
                     Console.Clear();
                     return;
                 default:
                     Console.WriteLine("Opção inválida, digite novamente!");
                     break;
             }
-        } while (opcao != 10);
+        } while (opcao != 11);
     }
 
     /// <summary>

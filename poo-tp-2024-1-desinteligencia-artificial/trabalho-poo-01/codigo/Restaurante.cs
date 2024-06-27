@@ -70,23 +70,6 @@ class Restaurante
     }
 
     /// <summary>
-    /// Processa a lista de espera para alocar mesas.
-    /// </summary>
-    /// <returns>True se pelo menos uma requisição foi processada com sucesso, caso contrário, False.</returns>
-    public bool ProcessarListaDeEspera()
-    {
-        foreach (ReqMesa req in listaEspera)
-        {
-            if (AlocarMesa(req))
-            {
-                listaEspera.Remove(req);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /// <summary>
     /// Adiciona um cliente à lista de clientes.
     /// </summary>
     /// <param name="nome">Nome do cliente.</param>
