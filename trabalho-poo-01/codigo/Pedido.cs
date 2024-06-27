@@ -5,8 +5,7 @@ class Pedido
 {
     private double TAXA_SERVICO = 0.1;
     private int idPedido;
-    private Dictionary<int, int> produtos;
-    private Cardapio cardapio;
+    private Dictionary<Produto, int> produtos;
 
     /// <summary>
     /// Construtor da classe Pedido.
@@ -15,24 +14,23 @@ class Pedido
     {
         Random rand = new Random();
         this.idPedido = rand.Next();
-        this.produtos = new Dictionary<int, int>();
-        this.cardapio = new Cardapio();
+        this.produtos = new Dictionary<Produto, int>();
     }
 
     /// <summary>
     /// Método que adiciona um produto ao pedido.
     /// </summary>
-    /// <param name="idProduto">ID do produto.</param>
+    /// <param name="produto">Produto.</param>
     /// <param name="quantidade">Quantidade do produto.</param>
-    public void AdicionarProduto(int idProduto, int quantidade)
+    public void AdicionarProduto(Produto produto, int quantidade)
     {
-        if (produtos.ContainsKey(idProduto))
+        if (produtos.ContainsKey(produto))
         {
-            produtos[idProduto] += quantidade;
+            produtos[produto] += quantidade;
         }
         else
         {
-            produtos.Add(idProduto, quantidade);
+            produtos.Add(produto, quantidade);
         }
     }
 
@@ -42,11 +40,9 @@ class Pedido
     private double CalcularValorConta()
     {
         double total = 0;
-        foreach (var produto in produtos)
+        foreach (var item in produtos)
         {
-            Produto infoProduct = cardapio.ObterProduto(produto.Key);
-
-            total += produto.Value * infoProduct.GetValor();
+            total += item.Value * item.Key.GetValor();
         }
 
         total += total * TAXA_SERVICO;
@@ -77,6 +73,8 @@ class Pedido
     {
         double total = this.CalcularValorConta();
 
+        // TODO: ADICIONAR 10%
+        // TODO: MUDAR PARA STRING
         if (numeroPessoas > 0)
         {
             return CalcularDividirConta(numeroPessoas, total);

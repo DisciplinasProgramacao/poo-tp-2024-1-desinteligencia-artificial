@@ -91,11 +91,11 @@ abstract class Loja
     /// <param name="idReq">ID da requisição.</param>
     public void PedirProduto(int idProduto, int quantidade, int idReq)
     {
-        Produto produto = cardapio.ObterProduto(idProduto);
+        Produto? produto = cardapio.ObterProduto(idProduto);
         ReqMesa? req = listaRegistros.Find(registro => registro.IdReq == idReq);
         if (produto != null && req != null)
         {
-            req.ReceberProdutos(idProduto, quantidade);
+            req.ReceberProdutos(produto, quantidade);
         }
     }
 
@@ -105,7 +105,7 @@ abstract class Loja
     /// <returns>String com a lista de produtos do cardápio.</returns>
     public string ExibirCardapio()
     {
-        return cardapio.MostrarOpcoes();
+        return cardapio.MostrarCardapio();
     }
 
     /// <summary>

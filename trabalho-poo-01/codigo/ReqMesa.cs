@@ -11,7 +11,8 @@ public enum StatusRequisicao
 /// <summary>
 /// Classe que armazena as requisi��es de uma mesa em um restaurante.
 /// </summary>
-class ReqMesa {
+class ReqMesa
+{
     private int idReq;
     private int qtdPessoas;
     private int? idMesa;
@@ -24,15 +25,25 @@ class ReqMesa {
     /// <summary>
     /// Método que retorna a id da requisição.
     /// </summary>  
-    public int IdReq{
-        get=> idReq;
+    public int IdReq
+    {
+        get => idReq;
+    }
+
+    /// <summary>
+    /// Método que retorna a id da mesa.
+    /// </summary>
+    public int? IdMesa
+    {
+        get => idMesa;
     }
 
     /// <summary>
     /// Método que retorna a quantidade de pessoas.
     /// </summary>
-    public int QntPessoas{
-        get=> qtdPessoas;
+    public int QtdPessoas
+    {
+        get => qtdPessoas;
     }
 
     /// <summary>
@@ -72,7 +83,8 @@ class ReqMesa {
     /// <summary>
     /// M�todo para fechar a requisi��o aberta, consiste em definir a data de sa�da para a requisi��o. Tamb�m, altera o status da requisi��o para finalizada
     /// </summary>
-    public double FecharRequisicao() {
+    public double FecharRequisicao()
+    {
         this.dataSaida = DateTime.Now;
         this.status = StatusRequisicao.Finalizada;
         return pedido.FecharConta(qtdPessoas);
@@ -93,7 +105,8 @@ class ReqMesa {
     /// </summary>
     /// <param name="idProduto">Identificador do produto desejado</param>
     /// <param name="quantidade">Quantidade do produto desejado</param>
-    public void ReceberProdutos(int idProduto, int quantidade) {
-        pedido.AdicionarProduto(idProduto,quantidade);
+    public void ReceberProdutos(Produto produto, int quantidade)
+    {
+        pedido.AdicionarProduto(produto, quantidade);
     }
 }

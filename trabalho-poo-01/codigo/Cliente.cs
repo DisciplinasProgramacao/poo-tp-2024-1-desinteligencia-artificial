@@ -14,7 +14,7 @@ class Cliente
     /// <summary>
     /// Método que retorna o nome do cliente.
     /// </summary>
-    public int Nome
+    public string Nome
     {
         get => nome;
     }

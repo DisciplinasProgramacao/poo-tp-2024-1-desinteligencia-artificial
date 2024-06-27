@@ -33,8 +33,9 @@ class Cardapio
     /// </summary>
     /// <param name="id">ID do produto.</param>
     /// <returns>O produto correspondente ao ID, ou null se não for encontrado.</returns>
-    public Produto ObterProduto(int id)
+    public Produto? ObterProduto(int id)
     {
-        return produtos.Find(p => p.GetId() == id);
+        Produto? produto = produtos.Find(produto => produto.GetId() == id);
+        return produto;
     }
 }

@@ -19,6 +19,7 @@ class Program
 
         Cliente cliente = restaurante.AdicionarCliente(nome);
 
+        // TODO: VERIFICAR SE JA EXISTE CLIENTE COM NOME IGUAL
         if (cliente != null)
         {
             Console.WriteLine("Cliente cadastrado com sucesso!");
@@ -112,6 +113,7 @@ class Program
     {
         int opcao;
 
+        // TODO: MENU DO PROGRAMA
         do
         {
             Console.WriteLine("---- MENU PRINCIPAL ----");
@@ -121,6 +123,7 @@ class Program
             Console.WriteLine("3) Encerrar o programa");
             Console.WriteLine("--------------------------");
 
+            // TODO: TRATAMENTO DE EXCEÇÕES 
             opcao = int.Parse(Console.ReadLine());
 
             switch (opcao)
