@@ -240,7 +240,7 @@ class Program
             Console.WriteLine("7) Ver o cardápio");
             Console.WriteLine("8) Fechar conta");
             Console.WriteLine("10) Ver clientes");
-            Console.WriteLine("11) Ver mesas");
+            Console.WriteLine("11) Ver requisições");
             Console.WriteLine("12) Voltar ao menu principal");
             Console.WriteLine("--------------------------");
 
@@ -284,7 +284,7 @@ class Program
                     Console.WriteLine(cafe.ListarClientes());
                     break;
                 case 11:
-                    Console.WriteLine(cafe.ListarMesas());
+                    Console.WriteLine(cafe.listaRegistrosAtendimentos());
                     break;
                 case 12:
                     return;
@@ -319,7 +319,7 @@ class Program
             Console.WriteLine("8) Adicionar produto.");
             Console.WriteLine("9) Ver o cardápio");
             Console.WriteLine("10) Ver clientes");
-            Console.WriteLine("11) Ver mesas");
+            Console.WriteLine("11) Ver requisições");
             Console.WriteLine("12) Fechar conta");
             Console.WriteLine("13) Voltar ao menu principal");
             Console.WriteLine("--------------------------");
@@ -370,7 +370,7 @@ class Program
                     Console.WriteLine(restaurante.ListarClientes());
                     break;
                 case 12:
-                    Console.WriteLine(restaurante.ListarMesas());
+                    Console.WriteLine(restaurante.listaRegistrosAtendimentos());
                     break;
                 case 13:
                     return;
