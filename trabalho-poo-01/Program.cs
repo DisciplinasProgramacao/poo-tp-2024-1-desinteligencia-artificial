@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 /// <summary>
@@ -239,7 +239,9 @@ class Program
             Console.WriteLine("6) Adicionar produto.");
             Console.WriteLine("7) Ver o cardápio");
             Console.WriteLine("8) Fechar conta");
-            Console.WriteLine("9) Voltar ao menu principal");
+            Console.WriteLine("10) Ver clientes");
+            Console.WriteLine("11) Ver mesas");
+            Console.WriteLine("12) Voltar ao menu principal");
             Console.WriteLine("--------------------------");
 
             bool opcaoValida = int.TryParse(Console.ReadLine(), out opcao);
@@ -278,13 +280,19 @@ class Program
                 case 8:
                     FecharConta(cafe);
                     break;
-                case 9:
+                case 10:
+                    Console.WriteLine(cafe.ListarClientes());
+                    break;
+                case 11:
+                    Console.WriteLine(cafe.ListarMesas());
+                    break;
+                case 12:
                     return;
                 default:
                     Console.WriteLine("Opção inválida, digite novamente!");
                     break;
             }
-        } while (opcao != 9);
+        } while (opcao != 12);
     }
 
     /// <summary>
@@ -310,8 +318,10 @@ class Program
             Console.WriteLine("7) Adicionar mesa.");
             Console.WriteLine("8) Adicionar produto.");
             Console.WriteLine("9) Ver o cardápio");
-            Console.WriteLine("10) Fechar conta");
-            Console.WriteLine("11) Voltar ao menu principal");
+            Console.WriteLine("10) Ver clientes");
+            Console.WriteLine("11) Ver mesas");
+            Console.WriteLine("12) Fechar conta");
+            Console.WriteLine("13) Voltar ao menu principal");
             Console.WriteLine("--------------------------");
 
             bool opcaoValida = int.TryParse(Console.ReadLine(), out opcao);
@@ -357,12 +367,18 @@ class Program
                     FecharConta(restaurante);
                     break;
                 case 11:
+                    Console.WriteLine(restaurante.ListarClientes());
+                    break;
+                case 12:
+                    Console.WriteLine(restaurante.ListarMesas());
+                    break;
+                case 13:
                     return;
                 default:
                     Console.WriteLine("Opção inválida, digite novamente!");
                     break;
             }
-        } while (opcao != 11);
+        } while (opcao != 13);
     }
 
     /// <summary>

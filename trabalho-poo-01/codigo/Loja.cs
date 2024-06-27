@@ -60,6 +60,32 @@ abstract class Loja
     }
 
     /// <summary>
+    /// Lista os clientes cadastrados.
+    /// </summary>
+    public string ListarClientes()
+    {
+        string listaClientes = $"Lista de {clientes.Count} clientes:\n";
+        foreach (var cliente in clientes)
+        {
+            listaClientes += $"{cliente.Nome}\n";
+        }
+        return listaClientes;
+    }
+
+    /// <summary>
+    /// Lista os registros de atendimentos.
+    /// </summary>
+    public string listaRegistrosAtendimentos()
+    {
+        string lista = "Lista de atendimentos: \n";
+        foreach (var req in listaRegistros)
+        {
+            lista += $"Requisição {req.IdReq} - Mesa {req.IdMesa} - Status: {req.Status} - NomeCliente: {req.NomeCliente} \n";
+        }
+        return lista;
+    }
+
+    /// <summary>
     /// Processa uma requisição de mesa, alocando uma mesa disponível ou adicionando à lista de espera.
     /// </summary>
     /// <param name="req">A requisição de mesa.</param>
