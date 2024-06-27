@@ -36,7 +36,7 @@ class Restaurante
     /// <returns>O valor da conta se a mesa foi fechada com sucesso, caso contrário, retorna 0.</returns>
     public double FecharConta(int idMesa, int qtdPessoas)
     {
-        ReqMesa req = listaRegistros.Find(r => r.idMesa == idMesa); 
+        ReqMesa req = listaRegistros.Find(r => r.idMesa == idMesa);
         Mesa mesa = mesas.Find(m => m.numeroMesa == idMesa);
         if (mesa != null)
         {
@@ -109,21 +109,6 @@ class Restaurante
         for (int i = 0; i < qtdMesas; i++)
         {
             mesas.Add(new Mesa { numeroMesa = i + 1, capacidade = qtdPessoas, isOcupada = false });
-        }
-    }
-
-    /// <summary>
-    /// Pede um produto para uma requisição específica.
-    /// </summary>
-    /// <param name="idProduto">ID do produto.</param>
-    /// <param name="idReq">ID da requisição.</param>
-    public void PedirProduto(int idProduto, int idReq)
-    {
-        Produto produto = produtos.Find(p => p.id == idProduto);
-        ReqMesa req = listaRegistros.Find(r => r.idReq == idReq);
-        if (produto != null && req != null)
-        {
-            req.pedido.AdicionarProduto(produto.id);
         }
     }
 }

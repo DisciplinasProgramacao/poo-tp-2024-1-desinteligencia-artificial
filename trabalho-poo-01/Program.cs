@@ -12,7 +12,7 @@ class Program
     /// <summary>
     /// Método para cadastrar um novo cliente no sistema.
     /// </summary>
-    public static void CadastrarCliente()
+    public static void CadastrarCliente(Loja loja)
     {
         Console.WriteLine("Digite o nome do cliente para cadastro no sistema:");
         string nome = Console.ReadLine();
@@ -20,10 +20,10 @@ class Program
         if (string.IsNullOrWhiteSpace(nome))
         {
             Console.WriteLine("Nome inválido! O nome do cliente não pode ser vazio.");
-            CadastrarCliente();
+            CadastrarCliente(loja);
         }
 
-        Cliente cliente = restaurante.AdicionarCliente(nome);
+        Cliente cliente = loja.AdicionarCliente(nome);
 
         if (cliente != null)
         {
@@ -32,14 +32,14 @@ class Program
         else
         {
             Console.WriteLine("Cliente já cadastrado! Tente novamente!");
-            CadastrarCliente();
+            CadastrarCliente(loja);
         }
     }
 
     /// <summary>
     /// Método para atender um cliente, verificando se está cadastrado e alocando uma mesa.
     /// </summary>
-    public static void AtenderCliente()
+    public static void AtenderCliente(Loja loja)
     {
         Console.WriteLine("Digite o nome do cliente para atendê-lo:");
         string nome = Console.ReadLine();
@@ -47,16 +47,16 @@ class Program
         if (string.IsNullOrWhiteSpace(nome))
         {
             Console.WriteLine("Nome inválido! O nome do cliente não pode ser vazio.");
-            AtenderCliente();
+            AtenderCliente(loja);
             return;
         }
 
-        Cliente? cliente = restaurante.PesquisarCliente(nome);
+        Cliente? cliente = loja.PesquisarCliente(nome);
 
         if (cliente == null)
         {
             Console.WriteLine("Cliente não foi encontrado no sistema, cadastre-o antes de atendê-lo!");
-            CadastrarCliente();
+            CadastrarCliente(loja);
             return;
         }
 
@@ -97,21 +97,12 @@ class Program
     }
 
     /// <summary>
-    /// Método para exibir o cardápio do restaurante.
+    /// Método para exibir o cardápio da loja.
     /// </summary>
-    /// <param name="restaurante">Instância do restaurante.</param>
-    public static void MostrarCardapio(Restaurante restaurante)
+    /// <param name="loja">Instância de loja.</param>
+    public static void MostrarCardapio(Loja loja)
     {
-        Console.WriteLine(restaurante.ExibirCardapio());
-    }
-
-    /// <summary>
-    /// Método para exibir o cardápio do café.
-    /// </summary>
-    /// <param name="cafe">Instância do café.</param>
-    public static void MostrarCardapio(Cafe cafe)
-    {
-        Console.WriteLine(cafe.ExibirCardapio());
+        Console.WriteLine(loja.ExibirCardapio());
     }
 
     /// <summary>
@@ -123,14 +114,22 @@ class Program
     }
 
     /// <summary>
+    /// Método para listar as mesas do restaurante.
+    /// </summary>
+    public static void ListarMesas(Loja loja)
+    {
+        Console.WriteLine(loja.ListarMesas());
+    }
+
+    /// <summary>
     /// Método para anotar o pedido de uma mesa.
     /// </summary>
-    public static void AnotarPedidoMesa()
+    public static void AnotarPedidoMesa(Loja loja)
     {
         Console.WriteLine("Digite o número da mesa:");
         int numeroMesa = int.Parse(Console.ReadLine());
 
-        Mesa? mesa = restaurante.PesquisarMesa(numeroMesa);
+        Mesa? mesa = loja.PesquisarMesa(numeroMesa);
 
         if (mesa == null)
         {
@@ -138,9 +137,10 @@ class Program
             return;
         }
 
+        // TODO: MOSTRAR CARDÁPIO
         Console.WriteLine("Digite o código do produto:");
         int codigoProduto = int.Parse(Console.ReadLine());
-        Produto? produto = restaurante.PesquisarProduto(codigoProduto);
+        Produto? produto = loja.PesquisarProduto(codigoProduto);
 
         if (produto == null)
         {
@@ -151,7 +151,7 @@ class Program
         Console.WriteLine("Digite a quantidade:");
         int quantidade = int.Parse(Console.ReadLine());
 
-        ReqMesa? req = restaurante.ObterRequisicaoPorMesa(numeroMesa);
+        ReqMesa? req = loja.ObterRequisicaoPorMesa(numeroMesa);
 
         if (req == null)
         {
@@ -159,25 +159,25 @@ class Program
             return;
         }
 
-        restaurante.PedirProduto(codigoProduto, quantidade, req.IdReq);
-        Console.WriteLine("Pedido anotado com sucesso.");
+        string resposta = loja.PedirProduto(codigoProduto, quantidade, req.IdReq);
+        Console.WriteLine(resposta);
     }
 
     /// <summary>
     /// Método para adicionar uma nova mesa ao restaurante.
     /// </summary>
-    public static void AdicionarMesa()
+    public static void AdicionarMesa(Loja loja)
     {
         Console.WriteLine("Digite a capacidade máxima da mesa:");
         int capacidade = int.Parse(Console.ReadLine());
-        restaurante.CriarMesa(capacidade);
+        loja.CriarMesa(capacidade);
         Console.WriteLine("Mesa adicionada com sucesso.");
     }
 
     /// <summary>
     /// Método para adicionar um novo produto ao cardápio do restaurante.
     /// </summary>
-    public static void AdicionarProduto()
+    public static void AdicionarProduto(Loja loja)
     {
         Console.WriteLine("Digite o código do novo produto:");
         int codigo = int.Parse(Console.ReadLine());
@@ -189,14 +189,14 @@ class Program
         double valor = double.Parse(Console.ReadLine());
 
         Produto produto = new Produto(codigo, nome, valor, descricao);
-        restaurante.AdicionarProdutoAoCardapio(produto);
+        loja.AdicionarProdutoAoCardapio(produto);
         Console.WriteLine("Produto adicionado com sucesso.");
     }
 
     /// <summary>
     /// Método para fechar a conta de uma mesa.
     /// </summary>
-    public static void FecharConta()
+    public static void FecharConta(Loja loja)
     {
         Console.WriteLine("Digite o número da mesa:");
 
@@ -206,7 +206,7 @@ class Program
             Console.WriteLine("Digite um número de mesa válido!");
         }
 
-        string resposta = restaurante.FecharConta(numeroMesa);
+        string resposta = loja.FecharConta(numeroMesa);
         Console.WriteLine(resposta);
     }
 
@@ -269,12 +269,13 @@ class Program
             Console.WriteLine("1) Cadastrar cliente.");
             Console.WriteLine("2) Atender cliente.");
             Console.WriteLine("3) Listar fila de espera.");
-            Console.WriteLine("4) Anotar pedido da mesa.");
-            Console.WriteLine("5) Adicionar mesa.");
-            Console.WriteLine("6) Adicionar produto.");
-            Console.WriteLine("7) Ver o cardápio");
-            Console.WriteLine("8) Fechar conta");
-            Console.WriteLine("9) Voltar ao menu principal");
+            Console.WriteLine("4) Ver mesas.");
+            Console.WriteLine("5) Anotar pedido da mesa.");
+            Console.WriteLine("6) Adicionar mesa.");
+            Console.WriteLine("7) Adicionar produto.");
+            Console.WriteLine("8) Ver o cardápio");
+            Console.WriteLine("9) Fechar conta");
+            Console.WriteLine("10) Voltar ao menu principal");
             Console.WriteLine("--------------------------");
 
             bool opcaoValida = int.TryParse(Console.ReadLine(), out opcao);
@@ -289,11 +290,11 @@ class Program
             {
                 case 1:
                     Console.Clear();
-                    CadastrarCliente();
+                    CadastrarCliente(restaurante);
                     break;
                 case 2:
                     Console.Clear();
-                    AtenderCliente();
+                    AtenderCliente(restaurante);
                     break;
                 case 3:
                     Console.Clear();
@@ -301,32 +302,36 @@ class Program
                     break;
                 case 4:
                     Console.Clear();
-                    AnotarPedidoMesa();
+                    ListarMesas(restaurante);
                     break;
                 case 5:
                     Console.Clear();
-                    AdicionarMesa();
+                    AnotarPedidoMesa(restaurante);
                     break;
                 case 6:
                     Console.Clear();
-                    AdicionarProduto();
+                    AdicionarMesa(restaurante);
                     break;
                 case 7:
                     Console.Clear();
-                    MostrarCardapio(restaurante);
+                    AdicionarProduto(restaurante);
                     break;
                 case 8:
                     Console.Clear();
-                    FecharConta();
+                    MostrarCardapio(restaurante);
                     break;
                 case 9:
+                    Console.Clear();
+                    FecharConta(restaurante);
+                    break;
+                case 10:
                     Console.Clear();
                     return;
                 default:
                     Console.WriteLine("Opção inválida, digite novamente!");
                     break;
             }
-        } while (opcao != 9);
+        } while (opcao != 10);
     }
 
     /// <summary>

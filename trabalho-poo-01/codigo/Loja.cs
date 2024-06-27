@@ -40,6 +40,11 @@ abstract class Loja
         Mesa? mesa = mesas.Find(mesa => mesa.NumeroMesa == idMesa);
         if (mesa != null && req != null)
         {
+            if (!mesa.EstaOcupada)
+            {
+                return "A mesa não está ocupada!";
+            }
+
             mesa.DesocuparMesa();
             return req.FecharRequisicao();
         }
@@ -105,14 +110,22 @@ abstract class Loja
     /// <param name="idProduto">ID do produto.</param>
     /// <param name="quantidade">Quantidade do produto.</param>
     /// <param name="idReq">ID da requisição.</param>
-    public void PedirProduto(int idProduto, int quantidade, int idReq)
+    public string PedirProduto(int idProduto, int quantidade, int idReq)
     {
         Produto? produto = cardapio.ObterProduto(idProduto);
         ReqMesa? req = listaRegistros.Find(registro => registro.IdReq == idReq);
         if (produto != null && req != null)
         {
+            if (req.Status != StatusRequisicao.Atendendo)
+            {
+                return "A mesa não está sendo atendida!";
+            }
+
             req.ReceberProdutos(produto, quantidade);
+            return $"Produto {produto.GetNome()} adicionado à mesa {req.IdMesa}";
         }
+
+        return "Produto ou mesa não encontrados!";
     }
 
     /// <summary>

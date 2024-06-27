@@ -57,11 +57,6 @@ class Pedido
     /// <param name="total">Valor total da conta.</param>
     public double CalcularDividirConta(int numeroPessoas, double total)
     {
-        if (numeroPessoas <= 0)
-        {
-            throw new ArgumentException("O número de pessoas deve ser maior que zero.");
-        }
-
         return total / numeroPessoas;
     }
 
@@ -71,19 +66,19 @@ class Pedido
     /// <param name="numeroPessoas">Número de pessoas.</param>
     /// <returns> Valor total do pedido e valor dividido para a quantidade de pessoas.</returns>      
     public string FecharConta(int numeroPessoas)
-{
-    double total = this.CalcularValorConta();
-    string conta = $"Valor total da conta {total}";
+    {
+        double total = this.CalcularValorConta();
+        string conta = $"Valor total da conta {total.ToString("C")}";
 
-    if (numeroPessoas > 1)
-    {
-        double totalDividido = CalcularDividirConta(numeroPessoas, total);
-        return $"{conta} - Valor da conta por pessoa: {totalDividido}";
+        if (numeroPessoas > 1)
+        {
+            double totalDividido = CalcularDividirConta(numeroPessoas, total);
+            return $"{conta} - Valor da conta por pessoa: {totalDividido.ToString("C")}";
+        }
+        else
+        {
+            return conta;
+        }
     }
-    else
-    {
-        return conta;
-    }
-}
 
 }

@@ -56,6 +56,14 @@ class ReqMesa
     }
 
     /// <summary>
+    /// Método que retorna o status da requisição.
+    /// </summary>
+    public StatusRequisicao Status
+    {
+        get => status;
+    }
+
+    /// <summary>
     /// M�todo construtor de uma requisi��o onde possui-se uma mesa alocada
     /// </summary>
     /// <param name="qtdPessoas">Quantidade de capacidade de pessoas na mesa</param>
