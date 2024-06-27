@@ -22,6 +22,20 @@ class ReqMesa {
     private Pedido pedido;
 
     /// <summary>
+    /// Método que retorna a id da requisição.
+    /// </summary>  
+    public int IdReq{
+        get=> idReq;
+    }
+
+    /// <summary>
+    /// Método que retorna a quantidade de pessoas.
+    /// </summary>
+    public int QntPessoas{
+        get=> qtdPessoas;
+    }
+
+    /// <summary>
     /// M�todo construtor de uma requisi��o onde possui-se uma mesa alocada
     /// </summary>
     /// <param name="qtdPessoas">Quantidade de capacidade de pessoas na mesa</param>

@@ -27,7 +27,6 @@ abstract class Loja
     /// Fecha a mesa especificada pelo ID, desocupando-a e retornando o valor da conta.
     /// </summary>
     /// <param name="idMesa">ID da mesa a ser fechada.</param>
-    /// <param name="qtdPessoas">Quantidade de pessoas que vão pagar.</param>
     /// <returns>O valor da conta se a mesa foi fechada com sucesso; caso contrário, retorna -1.</returns>
     public double FecharConta(int idMesa)
     {
