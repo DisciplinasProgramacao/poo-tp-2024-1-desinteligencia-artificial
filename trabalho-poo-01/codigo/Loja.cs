@@ -47,6 +47,19 @@ abstract class Loja
         return "Mesa não encontrada!";
     }
 
+    public string ListarMesasOcupadas()
+    {
+        string mesasOcupadas = "Mesas ocupadas:\n";
+        foreach (var mesa in mesas)
+        {
+            if (mesa.EstaOcupada)
+            {
+                mesasOcupadas += $"Mesa {mesa.NumeroMesa}\n";
+            }
+        }
+        return mesasOcupadas;
+    }
+
     /// <summary>
     /// Processa uma requisição de mesa, alocando uma mesa disponível ou adicionando à lista de espera.
     /// </summary>

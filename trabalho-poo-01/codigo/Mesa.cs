@@ -18,6 +18,11 @@ class Mesa
         get => numeroMesa;
     }
 
+    public bool EstaOcupada
+    {
+        get => estaOcupada;
+    }
+
     /// <summary>
     /// Método construtor da classe Mesa.
     /// </summary>
