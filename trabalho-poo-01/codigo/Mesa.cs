@@ -3,6 +3,8 @@
 /// </summary>
 class Mesa
 {
+
+    private static int proximoNumeroMesa = 1;
     // Atributos privados da classe Mesa.
     private int numeroMesa;
     private int capacidadeMaxima;
@@ -11,18 +13,18 @@ class Mesa
     /// <summary>
     /// Método que retorna o número da mesa.
     /// </summary>
-    public int NumeroMesa{
+    public int NumeroMesa
+    {
         get => numeroMesa;
     }
 
     /// <summary>
     /// Método construtor da classe Mesa.
     /// </summary>
-    /// <param name="numeroMesa">O número identificador da mesa.</param>
     /// <param name="capacidadeMaxima">A capacidade máxima de ocupação da mesa.</param>
-    public Mesa(int numeroMesa, int capacidadeMaxima)
+    public Mesa(int capacidadeMaxima)
     {
-        this.numeroMesa = numeroMesa;
+        this.numeroMesa = proximoNumeroMesa++;
         this.capacidadeMaxima = capacidadeMaxima;
         estaOcupada = false;
     }

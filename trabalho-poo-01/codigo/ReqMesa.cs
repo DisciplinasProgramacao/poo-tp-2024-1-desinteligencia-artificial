@@ -38,6 +38,15 @@ class ReqMesa
         get => idMesa;
     }
 
+
+    /// <summary>
+    /// Método que retorna o nome do cliente.
+    /// </summary>
+    public string? NomeCliente
+    {
+        get => nomeCliente;
+    }
+
     /// <summary>
     /// Método que retorna a quantidade de pessoas.
     /// </summary>

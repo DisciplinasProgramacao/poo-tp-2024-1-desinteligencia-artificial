@@ -76,6 +76,23 @@ class Restaurante : Loja
         return resposta;
     }
 
+    /// <summary>
+    /// Lista as requisições em espera.
+    /// </summary>
+    /// <returns>String contendo as requisições em espera.</returns>
+    public string ListarFilaDeEspera()
+    {
+
+        string lista = "Lista de fila de espera:";
+
+        foreach (ReqMesa req in listaEspera)
+        {
+            lista += $"Cliente: {req.NomeCliente}, Quantidade de pessoas: {req.QtdPessoas}";
+        }
+
+        return lista;
+    }
+
     protected override Cardapio CriarCardapio()
     {
         List<Produto> produtos = new List<Produto>
@@ -96,4 +113,5 @@ class Restaurante : Loja
         cardapio = new Cardapio(produtos);
         return cardapio;
     }
+
 }
