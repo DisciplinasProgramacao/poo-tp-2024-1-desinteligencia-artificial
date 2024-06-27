@@ -134,6 +134,7 @@ class Program
     /// </summary>
     public static void AnotarPedidoMesa(Loja loja)
     {
+        ListarMesas(loja);
         Console.WriteLine("Digite o número da mesa:");
         int numeroMesa = int.Parse(Console.ReadLine());
 
@@ -145,6 +146,7 @@ class Program
             return;
         }
 
+        MostrarCardapio(loja);
         Console.WriteLine("Digite o código do produto:");
         int codigoProduto = int.Parse(Console.ReadLine());
         Produto? produto = loja.PesquisarProduto(codigoProduto);
