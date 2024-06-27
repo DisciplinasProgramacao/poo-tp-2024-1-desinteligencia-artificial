@@ -1,7 +1,7 @@
 class Cliente
 {
 
-    public string nome { get; set; }
+    public string nome;
 
     /// <summary>
     /// Inicializa uma nova instância da classe Cliente com o nome fornecido.
@@ -9,6 +9,14 @@ class Cliente
     public Cliente(string nome)
     {
         this.nome = nome;
+    }
+
+    /// <summary>
+    /// Método que retorna o nome do cliente.
+    /// </summary>
+    public int Nome
+    {
+        get => nome;
     }
 
 }
