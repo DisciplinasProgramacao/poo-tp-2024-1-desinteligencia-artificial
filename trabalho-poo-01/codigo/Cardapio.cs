@@ -38,4 +38,13 @@ class Cardapio
         Produto? produto = produtos.Find(produto => produto.GetId() == id);
         return produto;
     }
+
+    /// <summary>
+    /// Adiciona um produto ao cardápio.
+    /// </summary>
+    /// <param name="produto">O produto a ser adicionado.</param>
+    public void AdicionarProduto(Produto produto)
+    {
+        produtos.Add(produto);
+    }
 }

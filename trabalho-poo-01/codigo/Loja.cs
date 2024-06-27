@@ -18,9 +18,15 @@ abstract class Loja
         this.clientes = new List<Cliente>();
         this.cardapio = CriarCardapio();
 
-        CriarMesas(4, 4); // 4 mesas de capacidade 4
-        CriarMesas(4, 6); // 4 mesas de capacidade 6
-        CriarMesas(2, 8); // 2 mesas de capacidade 8
+
+        int[] quantidades = { 4, 4, 2 };
+        int[] capacidades = { 4, 6, 8 };
+
+        for (int i = 0; i < quantidades[i]; i++)
+        {
+            CriarMesa(capacidades[i]);
+        }
+
     }
 
     /// <summary>
@@ -75,12 +81,9 @@ abstract class Loja
     /// </summary>
     /// <param name="qtdMesas">Quantidade de mesas a serem criadas.</param>
     /// <param name="qtdPessoas">Capacidade de pessoas por mesa.</param>
-    private void CriarMesas(int qtdMesas, int qtdPessoas)
+    public void CriarMesa(int qtdPessoas)
     {
-        for (int i = 0; i < qtdMesas; i++)
-        {
-            mesas.Add(new Mesa(i + 1, qtdPessoas));
-        }
+        mesas.Add(new Mesa(qtdPessoas));
     }
 
     /// <summary>
@@ -118,4 +121,38 @@ abstract class Loja
         Cliente? cliente = clientes.Find(cliente => cliente.Nome == nome);
         return cliente;
     }
+
+    /// <summary>
+    /// Pesquisa uma mesa pelo número.
+    /// </summary>
+    /// <param name="idMesa">Número da mesa a ser pesquisada.</param>
+    /// <returns>Objeto mesa ou nulo se não existir na lista.</returns>
+    public Mesa? PesquisarMesa(int idMesa)
+    {
+        Mesa? mesa = mesas.Find(mesa => mesa.NumeroMesa == idMesa);
+        return mesa;
+    }
+
+    /// <summary>
+    /// Pesquisa um produto pelo ID.
+    /// </summary>
+    /// <param name="idProduto">ID do produto a ser pesquisado.</param>
+    /// <returns>Objeto produto ou nulo se não existir no cardápio.</returns>
+    public Produto? PesquisarProduto(int idProduto)
+    {
+        Produto? produto = cardapio.ObterProduto(idProduto);
+        return produto;
+    }
+
+    public ReqMesa? ObterRequisicaoPorMesa(int idMesa)
+    {
+        ReqMesa? req = listaRegistros.Find(req => req.IdMesa == idMesa);
+        return req;
+    }
+
+    public void AdicionarProdutoAoCardapio(Produto produto)
+    {
+        cardapio.AdicionarProduto(produto);
+    }
+
 }
