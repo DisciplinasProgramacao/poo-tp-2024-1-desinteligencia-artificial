@@ -3,6 +3,20 @@ using System.Collections.Generic;
 
 class Cafe : Loja
 {
+
+    public Cafe()
+    {
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(8);
+        CriarMesa(8);
+    }
     /// <summary>
     /// Aloca uma mesa específica para uma requisição se disponível.
     /// </summary>

@@ -17,18 +17,6 @@ abstract class Loja
         this.listaRegistros = new List<ReqMesa>();
         this.clientes = new List<Cliente>();
         this.cardapio = CriarCardapio();
-
-        CriarMesa(4);
-        CriarMesa(4);
-        CriarMesa(4);
-        CriarMesa(4);
-        CriarMesa(6);
-        CriarMesa(6);
-        CriarMesa(6);
-        CriarMesa(6);
-        CriarMesa(8);
-        CriarMesa(8);
-
     }
 
     /// <summary>

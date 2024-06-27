@@ -14,6 +14,17 @@ class Restaurante : Loja
     public Restaurante()
     {
         this.listaEspera = new List<ReqMesa>();
+
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(4);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(6);
+        CriarMesa(8);
+        CriarMesa(8);
     }
 
     /// <summary>
@@ -61,7 +72,6 @@ class Restaurante : Loja
     public string ProcessarListaDeEspera()
     {
         string resposta = "";
-        // TODO: Corrigir erro de iteração e remoção simultânea.
         foreach (ReqMesa req in listaEspera)
         {
             foreach (Mesa mesa in mesas)
