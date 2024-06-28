@@ -28,11 +28,30 @@ class Restaurante : Loja
     }
 
     /// <summary>
+    /// Aloca uma mesa específica para uma requisição se disponível.
+    /// </summary>
+    /// <param name="req">A requisição de mesa.</param>
+    /// <param name="mesa">A mesa a ser alocada.</param>
+    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
+    private bool AlocarMesa(ReqMesa req, Mesa mesa)
+    {
+        if (mesa.VerificarDisponibilidade(req.QtdPessoas))
+        {
+            mesa.OcuparMesa();
+            req.AtribuirMesaARequisicao(mesa.NumeroMesa);
+            listaRegistros.Add(req);
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// Processa uma requisição de mesa, alocando uma mesa disponível ou adicionando à lista de espera.
     /// </summary>
     /// <param name="req">A requisição de mesa.</param>
     /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
-    public override bool ProcessarRequisicao(ReqMesa req)
+    public bool ProcessarRequisicao(ReqMesa req)
     {
         foreach (Mesa mesa in mesas)
         {
@@ -45,8 +64,6 @@ class Restaurante : Loja
         listaEspera.Add(req);
         return false;
     }
-
-    
 
     /// <summary>
     /// Processa a lista de espera, alocando mesas conforme disponibilidade.
@@ -81,6 +98,24 @@ class Restaurante : Loja
         }
 
         return resposta;
+    }
+
+    public string FecharConta(int idMesa)
+    {
+        ReqMesa? req = ObterRequisicaoPorMesa(idMesa);
+        Mesa? mesa = mesas.Find(mesa => mesa.NumeroMesa == idMesa);
+        if (mesa != null && req != null)
+        {
+            if (!mesa.EstaOcupada)
+            {
+                return "A mesa não está ocupada!";
+            }
+
+            mesa.DesocuparMesa();
+            return req.FecharRequisicao(true);
+        }
+
+        return "Mesa não encontrada!";
     }
 
     /// <summary>

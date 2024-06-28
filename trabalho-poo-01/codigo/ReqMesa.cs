@@ -77,7 +77,7 @@ class ReqMesa
         this.nomeCliente = nomeCliente;
         this.idMesa = idMesa;
         this.dataEntrada = DateTime.Now;
-        this.status = StatusRequisicao.EmEspera;
+        this.status = StatusRequisicao.Atendendo;
         this.pedido = new Pedido();
     }
 
@@ -100,11 +100,11 @@ class ReqMesa
     /// <summary>
     /// M�todo para fechar a requisi��o aberta, consiste em definir a data de sa�da para a requisi��o. Tamb�m, altera o status da requisi��o para finalizada
     /// </summary>
-    public string FecharRequisicao()
+    public string FecharRequisicao(bool comTaxaDeServico)
     {
         this.dataSaida = DateTime.Now;
         this.status = StatusRequisicao.Finalizada;
-        return pedido.FecharConta(qtdPessoas);
+        return pedido.FecharConta(qtdPessoas, comTaxaDeServico);
     }
 
     /// <summary>
@@ -125,5 +125,13 @@ class ReqMesa
     public void ReceberProdutos(Produto produto, int quantidade)
     {
         pedido.AdicionarProduto(produto, quantidade);
+    }
+
+    /// <summary>
+    /// Método para iniciar a requisição, alterando o status para atendendo.
+    /// </summary>
+    public void IniciarRequisicao()
+    {
+        this.status = StatusRequisicao.Atendendo;
     }
 }

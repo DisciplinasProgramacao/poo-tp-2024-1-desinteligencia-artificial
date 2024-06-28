@@ -37,7 +37,7 @@ class Pedido
     /// <summary>
     /// Método que remove um produto do pedido.
     /// </summary>
-    private double CalcularValorConta()
+    private double CalcularValorConta(bool comTaxaDeServico)
     {
         double total = 0;
         foreach (var item in produtos)
@@ -45,7 +45,8 @@ class Pedido
             total += item.Value * item.Key.GetValor();
         }
 
-        total += total * TAXA_SERVICO;
+        if (comTaxaDeServico)
+            total += total * TAXA_SERVICO;
 
         return total;
     }
@@ -65,9 +66,9 @@ class Pedido
     /// </summary>
     /// <param name="numeroPessoas">Número de pessoas.</param>
     /// <returns> Valor total do pedido e valor dividido para a quantidade de pessoas.</returns>      
-    public string FecharConta(int numeroPessoas)
+    public string FecharConta(int numeroPessoas, bool comTaxaDeServico)
     {
-        double total = this.CalcularValorConta();
+        double total = this.CalcularValorConta(comTaxaDeServico);
         string conta = $"Valor total da conta {total.ToString("C")}";
 
         if (numeroPessoas > 1)

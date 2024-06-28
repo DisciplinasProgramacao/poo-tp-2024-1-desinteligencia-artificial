@@ -19,28 +19,6 @@ abstract class Loja
         this.cardapio = CriarCardapio();
     }
 
-    /// <summary>
-    /// Fecha a mesa especificada pelo ID, desocupando-a e retornando o valor da conta.
-    /// </summary>
-    /// <param name="idMesa">ID da mesa a ser fechada.</param>
-    /// <returns>O valor da conta se a mesa foi fechada com sucesso; caso contrário, retorna -1.</returns>
-    public string FecharConta(int idMesa)
-    {
-        ReqMesa? req = ObterRequisicaoPorMesa(idMesa);
-        Mesa? mesa = mesas.Find(mesa => mesa.NumeroMesa == idMesa);
-        if (mesa != null && req != null)
-        {
-            if (!mesa.EstaOcupada)
-            {
-                return "A mesa não está ocupada!";
-            }
-
-            mesa.DesocuparMesa();
-            return req.FecharRequisicao();
-        }
-
-        return "Mesa não encontrada!";
-    }
 
     public string ListarMesas()
     {
@@ -83,32 +61,6 @@ abstract class Loja
             lista += $"Requisição: {req.IdReq} - Mesa: {req.IdMesa} - Status: {req.Status} - NomeCliente: {req.NomeCliente} \n \n";
         }
         return lista;
-    }
-
-    /// <summary>
-    /// Processa uma requisição de mesa, alocando uma mesa disponível ou adicionando à lista de espera.
-    /// </summary>
-    /// <param name="req">A requisição de mesa.</param>
-    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
-    abstract public bool ProcessarRequisicao(ReqMesa req);
-
-    /// <summary>
-    /// Aloca uma mesa específica para uma requisição se disponível.
-    /// </summary>
-    /// <param name="req">A requisição de mesa.</param>
-    /// <param name="mesa">A mesa a ser alocada.</param>
-    /// <returns>True se a mesa foi alocada com sucesso; caso contrário, False.</returns>
-    protected bool AlocarMesa(ReqMesa req, Mesa mesa)
-    {
-        if (mesa.VerificarDisponibilidade(req.QtdPessoas))
-        {
-            mesa.OcuparMesa();
-            req.AtribuirMesaARequisicao(mesa.NumeroMesa);
-            listaRegistros.Add(req);
-            return true;
-        }
-
-        return false;
     }
 
     abstract protected Cardapio CriarCardapio();
@@ -209,6 +161,12 @@ abstract class Loja
     public ReqMesa? ObterRequisicaoPorMesa(int idMesa)
     {
         ReqMesa? req = listaRegistros.Find(req => req.IdMesa == idMesa && req.Status == StatusRequisicao.Atendendo);
+        return req;
+    }
+
+    public ReqMesa? ObterRequisicaoPorCliente(string nomeCliente)
+    {
+        ReqMesa? req = listaRegistros.Find(req => req.NomeCliente == nomeCliente && req.Status == StatusRequisicao.Atendendo);
         return req;
     }
 
